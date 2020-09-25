@@ -36,11 +36,11 @@
             // titleLabel
             // 
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.titleLabel.Font = new System.Drawing.Font("Digital-7 Mono", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Font = new System.Drawing.Font("Digital-7 Mono", 71.99999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.ForeColor = System.Drawing.Color.White;
-            this.titleLabel.Location = new System.Drawing.Point(159, 61);
+            this.titleLabel.Location = new System.Drawing.Point(176, 61);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(496, 109);
+            this.titleLabel.Size = new System.Drawing.Size(727, 159);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "Space Race";
             // 
@@ -80,13 +80,14 @@
             // 
             // MainScreen
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.playAgainButton);
             this.Controls.Add(this.quitButton);
             this.Controls.Add(this.titleLabel);
             this.Name = "MainScreen";
-            this.Size = new System.Drawing.Size(800, 862);
+            this.Size = new System.Drawing.Size(800, 700);
             this.ResumeLayout(false);
 
         }

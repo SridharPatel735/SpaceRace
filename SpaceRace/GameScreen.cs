@@ -17,8 +17,12 @@ namespace SpaceRace
         Ship Hero1 = new Ship();
         Ship Hero2 = new Ship();
         SolidBrush brush = new SolidBrush(Color.White);
-
-        //public Rectangle p11, p12, p13, p21, p22, p23;
+        int player1X = 295;
+        int player1Y = 650;
+        int player2X = 495;
+        int player2Y = 650;
+        int shipWidth = 25;
+        int shipHeight = 45;
 
         public GameScreen()
         {
@@ -58,22 +62,19 @@ namespace SpaceRace
             Hero2.p23.Y = 784;
             Hero2.p23.Width = 10;
             Hero2.p23.Height = 24;
+            Hero2.shipImage = Properties.Resources.kindpng_490723;
         }
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+
             Refresh();
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Hero1.shipImage, Hero1.p11);
-            e.Graphics.FillRectangle(brush, Hero1.p11);
-            e.Graphics.FillRectangle(brush, Hero1.p12);
-            e.Graphics.FillRectangle(brush, Hero1.p12);
-            e.Graphics.FillRectangle(brush, Hero1.p21);
-            e.Graphics.FillRectangle(brush, Hero1.p22);
-            e.Graphics.FillRectangle(brush, Hero1.p23);
+            e.Graphics.DrawImage(Hero1.shipImage, player1X, player1Y, shipWidth, shipHeight);
+            e.Graphics.DrawImage(Hero2.shipImage, player2X, player2Y, shipWidth, shipHeight);
         }
     }
 }
