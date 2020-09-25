@@ -34,13 +34,13 @@ namespace SpaceRace
 
         private void quitButton_Enter(object sender, EventArgs e)
         {
-            playAgainButton.BackColor = Color.Black;
+            playButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Red;
         }
 
         private void playAgainButton_Enter(object sender, EventArgs e)
         {
-            playAgainButton.BackColor = Color.Green;
+            playButton.BackColor = Color.Green;
             quitButton.BackColor = Color.Black;
         }
     }

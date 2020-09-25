@@ -45,9 +45,9 @@
             this.titleLabel.ForeColor = System.Drawing.Color.White;
             this.titleLabel.Location = new System.Drawing.Point(18, 49);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(503, 39);
+            this.titleLabel.Size = new System.Drawing.Size(549, 39);
             this.titleLabel.TabIndex = 0;
-            this.titleLabel.Text = "Player 1                   Player 2";
+            this.titleLabel.Text = "Player 1                  Player 2";
             // 
             // startButton
             // 
@@ -124,7 +124,7 @@
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.titleLabel);
             this.Name = "SelectionScreen";
-            this.Size = new System.Drawing.Size(800, 700);
+            this.Size = new System.Drawing.Size(800, 862);
             ((System.ComponentModel.ISupportInitialize)(this.p2PictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1PictureBox)).EndInit();
             this.ResumeLayout(false);

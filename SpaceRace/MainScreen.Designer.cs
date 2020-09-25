@@ -30,17 +30,17 @@
         {
             this.titleLabel = new System.Windows.Forms.Label();
             this.quitButton = new System.Windows.Forms.Button();
-            this.playAgainButton = new System.Windows.Forms.Button();
+            this.playButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleLabel
             // 
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.titleLabel.Font = new System.Drawing.Font("Digital-7 Mono", 71.99999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Font = new System.Drawing.Font("Digital-7 Mono", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.ForeColor = System.Drawing.Color.White;
             this.titleLabel.Location = new System.Drawing.Point(176, 61);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(727, 159);
+            this.titleLabel.Size = new System.Drawing.Size(494, 107);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "Space Race";
             // 
@@ -61,33 +61,33 @@
             this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
             this.quitButton.Enter += new System.EventHandler(this.quitButton_Enter);
             // 
-            // playAgainButton
+            // playButton
             // 
-            this.playAgainButton.BackColor = System.Drawing.Color.Black;
-            this.playAgainButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.playAgainButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
-            this.playAgainButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.playAgainButton.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playAgainButton.ForeColor = System.Drawing.Color.White;
-            this.playAgainButton.Location = new System.Drawing.Point(175, 234);
-            this.playAgainButton.Name = "playAgainButton";
-            this.playAgainButton.Size = new System.Drawing.Size(179, 75);
-            this.playAgainButton.TabIndex = 3;
-            this.playAgainButton.Text = "Play Again";
-            this.playAgainButton.UseVisualStyleBackColor = false;
-            this.playAgainButton.Click += new System.EventHandler(this.playAgainButton_Click);
-            this.playAgainButton.Enter += new System.EventHandler(this.playAgainButton_Enter);
+            this.playButton.BackColor = System.Drawing.Color.Black;
+            this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.playButton.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.ForeColor = System.Drawing.Color.White;
+            this.playButton.Location = new System.Drawing.Point(175, 234);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(179, 75);
+            this.playButton.TabIndex = 3;
+            this.playButton.Text = "Play";
+            this.playButton.UseVisualStyleBackColor = false;
+            this.playButton.Click += new System.EventHandler(this.playAgainButton_Click);
+            this.playButton.Enter += new System.EventHandler(this.playAgainButton_Enter);
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.playAgainButton);
+            this.Controls.Add(this.playButton);
             this.Controls.Add(this.quitButton);
             this.Controls.Add(this.titleLabel);
             this.Name = "MainScreen";
-            this.Size = new System.Drawing.Size(800, 700);
+            this.Size = new System.Drawing.Size(800, 862);
             this.ResumeLayout(false);
 
         }
@@ -96,6 +96,6 @@
 
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Button quitButton;
-        private System.Windows.Forms.Button playAgainButton;
+        private System.Windows.Forms.Button playButton;
     }
 }
