@@ -32,6 +32,7 @@ namespace SpaceRace
 
         private void SetParameters()
         {
+
             Hero1.leftRecP1.X = 295;
             Hero1.leftRecP1.Y = 784;
             Hero1.leftRecP1.Width = 10;
