@@ -53,17 +53,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameScreen.cs">
+    <Compile Include="GameScreen2Player.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GameScreen.Designer.cs">
-      <DependentUpon>GameScreen.cs</DependentUpon>
+    <Compile Include="GameScreen2Player.Designer.cs">
+      <DependentUpon>GameScreen2Player.cs</DependentUpon>
     </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MainScreen.Designer.cs">
       <DependentUpon>MainScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameScreen1Player.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameScreen1Player.Designer.cs">
+      <DependentUpon>GameScreen1Player.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,15 +79,18 @@
     <Compile Include="SelectionScreen.Designer.cs">
       <DependentUpon>SelectionScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ship.cs" />
+    <Compile Include="SpaceShip.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GameScreen.resx">
-      <DependentUpon>GameScreen.cs</DependentUpon>
+    <EmbeddedResource Include="GameScreen2Player.resx">
+      <DependentUpon>GameScreen2Player.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameScreen1Player.resx">
+      <DependentUpon>GameScreen1Player.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

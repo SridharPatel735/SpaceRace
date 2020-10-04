@@ -34,6 +34,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.p2PictureBox = new System.Windows.Forms.PictureBox();
             this.p1PictureBox = new System.Windows.Forms.PictureBox();
+            this.doubleSpeedPlayer1 = new System.Windows.Forms.Button();
+            this.resetPlayer2 = new System.Windows.Forms.Button();
+            this.doubleSpeedPlayer2 = new System.Windows.Forms.Button();
+            this.resetPlayer1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.outputLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.p2PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1PictureBox)).BeginInit();
             this.SuspendLayout();
@@ -112,11 +118,107 @@
             this.p1PictureBox.TabIndex = 6;
             this.p1PictureBox.TabStop = false;
             // 
+            // doubleSpeedPlayer1
+            // 
+            this.doubleSpeedPlayer1.BackColor = System.Drawing.Color.Black;
+            this.doubleSpeedPlayer1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.doubleSpeedPlayer1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.doubleSpeedPlayer1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.doubleSpeedPlayer1.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doubleSpeedPlayer1.ForeColor = System.Drawing.Color.White;
+            this.doubleSpeedPlayer1.Location = new System.Drawing.Point(23, 650);
+            this.doubleSpeedPlayer1.Name = "doubleSpeedPlayer1";
+            this.doubleSpeedPlayer1.Size = new System.Drawing.Size(179, 75);
+            this.doubleSpeedPlayer1.TabIndex = 9;
+            this.doubleSpeedPlayer1.Text = "Double Speed";
+            this.doubleSpeedPlayer1.UseVisualStyleBackColor = false;
+            this.doubleSpeedPlayer1.Click += new System.EventHandler(this.doubleSpeedPlayer1_Click);
+            this.doubleSpeedPlayer1.Enter += new System.EventHandler(this.doubleSpeedPlayer1_Enter);
+            // 
+            // resetPlayer2
+            // 
+            this.resetPlayer2.BackColor = System.Drawing.Color.Black;
+            this.resetPlayer2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.resetPlayer2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.resetPlayer2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetPlayer2.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetPlayer2.ForeColor = System.Drawing.Color.White;
+            this.resetPlayer2.Location = new System.Drawing.Point(23, 765);
+            this.resetPlayer2.Name = "resetPlayer2";
+            this.resetPlayer2.Size = new System.Drawing.Size(179, 75);
+            this.resetPlayer2.TabIndex = 10;
+            this.resetPlayer2.Text = "Reset Opponent";
+            this.resetPlayer2.UseVisualStyleBackColor = false;
+            this.resetPlayer2.Click += new System.EventHandler(this.resetPlayer2_Click);
+            this.resetPlayer2.Enter += new System.EventHandler(this.resetPlayer2_Enter);
+            // 
+            // doubleSpeedPlayer2
+            // 
+            this.doubleSpeedPlayer2.BackColor = System.Drawing.Color.Black;
+            this.doubleSpeedPlayer2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.doubleSpeedPlayer2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.doubleSpeedPlayer2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.doubleSpeedPlayer2.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doubleSpeedPlayer2.ForeColor = System.Drawing.Color.White;
+            this.doubleSpeedPlayer2.Location = new System.Drawing.Point(275, 650);
+            this.doubleSpeedPlayer2.Name = "doubleSpeedPlayer2";
+            this.doubleSpeedPlayer2.Size = new System.Drawing.Size(179, 75);
+            this.doubleSpeedPlayer2.TabIndex = 11;
+            this.doubleSpeedPlayer2.Text = "Double Speed";
+            this.doubleSpeedPlayer2.UseVisualStyleBackColor = false;
+            this.doubleSpeedPlayer2.Click += new System.EventHandler(this.doubleSpeedPlayer2_Click);
+            this.doubleSpeedPlayer2.Enter += new System.EventHandler(this.doubleSpeedPlayer2_Enter);
+            // 
+            // resetPlayer1
+            // 
+            this.resetPlayer1.BackColor = System.Drawing.Color.Black;
+            this.resetPlayer1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.resetPlayer1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.resetPlayer1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetPlayer1.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetPlayer1.ForeColor = System.Drawing.Color.White;
+            this.resetPlayer1.Location = new System.Drawing.Point(275, 765);
+            this.resetPlayer1.Name = "resetPlayer1";
+            this.resetPlayer1.Size = new System.Drawing.Size(179, 75);
+            this.resetPlayer1.TabIndex = 12;
+            this.resetPlayer1.Text = "Reset Opponent";
+            this.resetPlayer1.UseVisualStyleBackColor = false;
+            this.resetPlayer1.Click += new System.EventHandler(this.resetPlayer1_Click);
+            this.resetPlayer1.Enter += new System.EventHandler(this.resetPlayer1_Enter);
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label2.Font = new System.Drawing.Font("Digital-7 Mono", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(23, 528);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(729, 111);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Each Player choose a powerup. Double speed doubles your speed, and reset opponent" +
+    " will let you reset your opponents position twice.";
+            // 
+            // outputLabel
+            // 
+            this.outputLabel.Font = new System.Drawing.Font("Digital-7 Mono", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputLabel.ForeColor = System.Drawing.Color.White;
+            this.outputLabel.Location = new System.Drawing.Point(516, 679);
+            this.outputLabel.Name = "outputLabel";
+            this.outputLabel.Size = new System.Drawing.Size(236, 161);
+            this.outputLabel.TabIndex = 14;
+            // 
             // SelectionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.outputLabel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.resetPlayer1);
+            this.Controls.Add(this.doubleSpeedPlayer2);
+            this.Controls.Add(this.resetPlayer2);
+            this.Controls.Add(this.doubleSpeedPlayer1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.p2PictureBox);
             this.Controls.Add(this.p1PictureBox);
@@ -140,5 +242,11 @@
         private System.Windows.Forms.PictureBox p1PictureBox;
         private System.Windows.Forms.PictureBox p2PictureBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button doubleSpeedPlayer1;
+        private System.Windows.Forms.Button resetPlayer2;
+        private System.Windows.Forms.Button doubleSpeedPlayer2;
+        private System.Windows.Forms.Button resetPlayer1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label outputLabel;
     }
 }
