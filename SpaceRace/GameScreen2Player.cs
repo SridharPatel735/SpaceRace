@@ -102,7 +102,7 @@ namespace SpaceRace
             player2Y = this.Height - 50;
 
             timerX = this.Width / 2 - 5;
-            timerY = 25;
+            timerY = this.Height;
 
             //add box
             for (int i = 0; i <= 22; i++)
@@ -296,7 +296,7 @@ namespace SpaceRace
                 Players.rightRecP2.X += player2Speed;
             }
 
-            if (upArrowDown == false)
+            if (upArrowDown == true)
             {
                 player1Y -= player1Speed;
                 Players.leftRecP1.Y -= player1Speed;
