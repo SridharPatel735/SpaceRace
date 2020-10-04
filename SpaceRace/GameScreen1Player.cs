@@ -15,8 +15,8 @@ namespace SpaceRace
     {
         List<Bullets> left = new List<Bullets>();
         List<Bullets> right = new List<Bullets>();
+        List<HighScore> score = new List<HighScore>();
         SolidBrush whiteBrush = new SolidBrush(Color.White);
-        SolidBrush redBrush = new SolidBrush(Color.Red);
         Rectangle leftRec, middleRec, rightRec;
         Image shipImage = Properties.Resources.kindpng_490723;
         int shipWidth = 25;
@@ -205,6 +205,9 @@ namespace SpaceRace
             {
                 player1Points++;
                 playerScore.Text = "" + player1Points;
+
+                HighScore hs = new HighScore(player1Points);
+                score.Add(hs);
 
                 player1X = this.Width / 2 - 125;
                 player1Y = this.Height - 50;

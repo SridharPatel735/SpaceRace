@@ -32,6 +32,8 @@
             this.quitButton = new System.Windows.Forms.Button();
             this.play2PlayerButton = new System.Windows.Forms.Button();
             this.play1PlayerButton = new System.Windows.Forms.Button();
+            this.highScoreButton = new System.Windows.Forms.Button();
+            this.highScoreLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -53,7 +55,7 @@
             this.quitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.quitButton.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quitButton.ForeColor = System.Drawing.Color.White;
-            this.quitButton.Location = new System.Drawing.Point(333, 334);
+            this.quitButton.Location = new System.Drawing.Point(175, 334);
             this.quitButton.Name = "quitButton";
             this.quitButton.Size = new System.Drawing.Size(179, 75);
             this.quitButton.TabIndex = 2;
@@ -96,11 +98,41 @@
             this.play1PlayerButton.Click += new System.EventHandler(this.play1PlayerButton_Click);
             this.play1PlayerButton.Enter += new System.EventHandler(this.play1PlayerButton_Enter);
             // 
+            // highScoreButton
+            // 
+            this.highScoreButton.BackColor = System.Drawing.Color.Black;
+            this.highScoreButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.highScoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.highScoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.highScoreButton.Font = new System.Drawing.Font("Digital-7 Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.highScoreButton.ForeColor = System.Drawing.Color.White;
+            this.highScoreButton.Location = new System.Drawing.Point(491, 334);
+            this.highScoreButton.Name = "highScoreButton";
+            this.highScoreButton.Size = new System.Drawing.Size(179, 75);
+            this.highScoreButton.TabIndex = 5;
+            this.highScoreButton.Text = "HighScore      1 player";
+            this.highScoreButton.UseVisualStyleBackColor = false;
+            this.highScoreButton.Click += new System.EventHandler(this.highScoreButton_Click);
+            this.highScoreButton.Enter += new System.EventHandler(this.highScoreButton_Enter);
+            // 
+            // highScoreLabel
+            // 
+            this.highScoreLabel.BackColor = System.Drawing.Color.Transparent;
+            this.highScoreLabel.Font = new System.Drawing.Font("Digital-7 Mono", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.highScoreLabel.ForeColor = System.Drawing.Color.White;
+            this.highScoreLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.highScoreLabel.Location = new System.Drawing.Point(360, 492);
+            this.highScoreLabel.Name = "highScoreLabel";
+            this.highScoreLabel.Size = new System.Drawing.Size(125, 308);
+            this.highScoreLabel.TabIndex = 6;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.highScoreLabel);
+            this.Controls.Add(this.highScoreButton);
             this.Controls.Add(this.play1PlayerButton);
             this.Controls.Add(this.play2PlayerButton);
             this.Controls.Add(this.quitButton);
@@ -117,5 +149,7 @@
         private System.Windows.Forms.Button quitButton;
         private System.Windows.Forms.Button play2PlayerButton;
         private System.Windows.Forms.Button play1PlayerButton;
+        private System.Windows.Forms.Button highScoreButton;
+        private System.Windows.Forms.Label highScoreLabel;
     }
 }

@@ -59,6 +59,7 @@
     <Compile Include="GameScreen2Player.Designer.cs">
       <DependentUpon>GameScreen2Player.cs</DependentUpon>
     </Compile>
+    <Compile Include="HighScore.cs" />
     <Compile Include="MainScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +121,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\kindpng_490723.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HighScore.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
