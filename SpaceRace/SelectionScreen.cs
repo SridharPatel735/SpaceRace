@@ -28,6 +28,7 @@ namespace SpaceRace
                 GameScreen2Player gs = new GameScreen2Player();
                 // Add the User Control to the Form
                 f.Controls.Add(gs);
+                gs.Focus();
             }
             else
             {

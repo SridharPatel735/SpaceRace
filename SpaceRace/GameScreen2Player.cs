@@ -105,7 +105,7 @@ namespace SpaceRace
             timerY = this.Height;
 
             //add box
-            for (int i = 0; i <= 22; i++)
+            for (int i = 0; i <= 10; i++)
             {
                 Bullets newBulletLeft = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
                 left.Add(newBulletLeft);
@@ -191,59 +191,59 @@ namespace SpaceRace
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             #region Collisions
-            //if (left.Count >= 22)
-            //{
-            //    for (int i = 0; i <= 22; i++)
-            //    {
-            //        Rectangle leftBullets = new Rectangle(left[i].bulletX, left[i].bulletY, left[i].bulletWidth, left[i].bulletHeight);
-            //        Rectangle rightBullets = new Rectangle(right[i].bulletX, right[i].bulletY, right[i].bulletWidth, right[i].bulletHeight);
+            if (left.Count >= right.Count)
+            {
+                for (int i = 0; i < right.Count; i++)
+                {
+                    Rectangle leftBullets = new Rectangle(left[i].bulletX, left[i].bulletY, left[i].bulletWidth, left[i].bulletHeight);
+                    Rectangle rightBullets = new Rectangle(right[i].bulletX, right[i].bulletY, right[i].bulletWidth, right[i].bulletHeight);
 
-            //        if (leftBullets.IntersectsWith(Players.leftRecP1) || leftBullets.IntersectsWith(Players.middleRecP1) || leftBullets.IntersectsWith(Players.rightRecP1) || rightBullets.IntersectsWith(Players.leftRecP1) || rightBullets.IntersectsWith(Players.middleRecP1) || rightBullets.IntersectsWith(Players.rightRecP1))
-            //        {
-            //            player1X = this.Width / 2 - 125;
-            //            player1Y = this.Height - 50;
+                    if (leftBullets.IntersectsWith(Players.leftRecP1) || leftBullets.IntersectsWith(Players.middleRecP1) || leftBullets.IntersectsWith(Players.rightRecP1) || rightBullets.IntersectsWith(Players.leftRecP1) || rightBullets.IntersectsWith(Players.middleRecP1) || rightBullets.IntersectsWith(Players.rightRecP1))
+                    {
+                        player1X = this.Width / 2 - 125;
+                        player1Y = this.Height - 50;
 
-            //            Players.leftRecP1.X = 295;
-            //            Players.leftRecP1.Y = 784;
-            //            Players.leftRecP1.Width = 10;
-            //            Players.leftRecP1.Height = 24;
+                        Players.leftRecP1.X = 295;
+                        Players.leftRecP1.Y = 784;
+                        Players.leftRecP1.Width = 10;
+                        Players.leftRecP1.Height = 24;
 
-            //            Players.middleRecP1.X = 302;
-            //            Players.middleRecP1.Y = 784;
-            //            Players.middleRecP1.Width = 10;
-            //            Players.middleRecP1.Height = 43;
+                        Players.middleRecP1.X = 302;
+                        Players.middleRecP1.Y = 784;
+                        Players.middleRecP1.Width = 10;
+                        Players.middleRecP1.Height = 43;
 
-            //            Players.rightRecP1.X = 310;
-            //            Players.rightRecP1.Y = 784;
-            //            Players.rightRecP1.Width = 10;
-            //            Players.rightRecP1.Height = 24;
-            //        }
-            //        if (leftBullets.IntersectsWith(Players.leftRecP2) || leftBullets.IntersectsWith(Players.middleRecP2) || leftBullets.IntersectsWith(Players.rightRecP2) || rightBullets.IntersectsWith(Players.leftRecP2) || rightBullets.IntersectsWith(Players.middleRecP2) || rightBullets.IntersectsWith(Players.rightRecP2))
-            //        {
-            //            player2X = this.Width / 2 + 100;
-            //            player2Y = this.Height - 50;
+                        Players.rightRecP1.X = 310;
+                        Players.rightRecP1.Y = 784;
+                        Players.rightRecP1.Width = 10;
+                        Players.rightRecP1.Height = 24;
+                    }
+                    //if (leftBullets.IntersectsWith(Players.leftRecP2) || leftBullets.IntersectsWith(Players.middleRecP2) || leftBullets.IntersectsWith(Players.rightRecP2) || rightBullets.IntersectsWith(Players.leftRecP2) || rightBullets.IntersectsWith(Players.middleRecP2) || rightBullets.IntersectsWith(Players.rightRecP2))
+                    //{
+                    //    player2X = this.Width / 2 + 100;
+                    //    player2Y = this.Height - 50;
 
-            //            Players.leftRecP2.X = 495;
-            //            Players.leftRecP2.Y = 784;
-            //            Players.leftRecP2.Width = 10;
-            //            Players.leftRecP2.Height = 24;
+                    //    Players.leftRecP2.X = 495;
+                    //    Players.leftRecP2.Y = 784;
+                    //    Players.leftRecP2.Width = 10;
+                    //    Players.leftRecP2.Height = 24;
 
-            //            Players.middleRecP2.X = 502;
-            //            Players.middleRecP2.Y = 784;
-            //            Players.middleRecP2.Width = 10;
-            //            Players.middleRecP2.Height = 43;
+                    //    Players.middleRecP2.X = 502;
+                    //    Players.middleRecP2.Y = 784;
+                    //    Players.middleRecP2.Width = 10;
+                    //    Players.middleRecP2.Height = 43;
 
-            //            Players.rightRecP2.X = 510;
-            //            Players.rightRecP2.Y = 784;
-            //            Players.rightRecP2.Width = 10;
-            //            Players.rightRecP2.Height = 24;
-            //        }
-            //    }
-            //}
+                    //    Players.rightRecP2.X = 510;
+                    //    Players.rightRecP2.Y = 784;
+                    //    Players.rightRecP2.Width = 10;
+                    //    Players.rightRecP2.Height = 24;
+                    //}
+                }
+            }
             #endregion
 
             #region Adding Bullets
-            if (bulletCounter == 5)
+            if (bulletCounter == 8)
             {
                 Bullets newBulletLeft = new Bullets(0 - bulletWidth, randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
                 left.Add(newBulletLeft);
@@ -274,21 +274,21 @@ namespace SpaceRace
                 Players.middleRecP2.Y -= player2Speed;
                 Players.rightRecP2.Y -= player2Speed;
             }
-            if (sDown == true)
+            if (sDown == true && player2Y + shipHeight >= this.Height)
             {
                 player2Y += player2Speed;
                 Players.leftRecP2.Y += player2Speed;
                 Players.middleRecP2.Y += player2Speed;
                 Players.rightRecP2.Y += player2Speed;
             }
-            if (aDown == true)
+            if (aDown == true && player2X >= 0)
             {
                 player2X -= player2Speed;
                 Players.leftRecP2.X -= player2Speed;
                 Players.middleRecP2.X -= player2Speed;
                 Players.rightRecP2.X -= player2Speed;
             }
-            if (dDown == true)
+            if (dDown == true && player2X + shipWidth <= this.Width)
             {
                 player2X += player2Speed;
                 Players.leftRecP2.X += player2Speed;
@@ -303,21 +303,21 @@ namespace SpaceRace
                 Players.middleRecP1.Y -= player1Speed;
                 Players.rightRecP1.Y -= player1Speed;
             }
-            if (downArrowDown == true)
+            if (downArrowDown == true && player1Y + shipHeight >= this.Height)
             {
                 player1Y += player1Speed;
                 Players.leftRecP1.Y += player1Speed;
                 Players.middleRecP1.Y += player1Speed;
                 Players.rightRecP1.Y += player1Speed;
             }
-            if (leftArrowDown == true)
+            if (leftArrowDown == true && player1X >= 0)
             {
                 player1X -= player1Speed;
                 Players.leftRecP1.X -= player1Speed;
                 Players.middleRecP1.X -= player1Speed;
                 Players.rightRecP1.X -= player1Speed;
             }
-            if (rightArrowDown == true)
+            if (rightArrowDown == true && player1X + shipWidth <= this.Width)
             {
                 player1X += player1Speed;
                 Players.leftRecP1.X += player1Speed;
