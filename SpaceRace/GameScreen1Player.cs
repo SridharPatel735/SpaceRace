@@ -18,7 +18,7 @@ namespace SpaceRace
         List<HighScore> score = new List<HighScore>();
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         Rectangle leftRec, middleRec, rightRec;
-        Image shipImage = Properties.Resources.kindpng_490723;
+        Image shipImage = Properties.Resources.Spaceship;
         int shipWidth = 25;
         int shipHeight = 45;
         int bulletHeight = 5;
@@ -59,7 +59,7 @@ namespace SpaceRace
             player1Speed = 2;
 
             //add box
-            for (int i = 0; i <= 22; i++)
+            for (int i = 0; i <= 10; i++)
             {
                 Bullets newBulletLeft = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
                 left.Add(newBulletLeft);
@@ -135,7 +135,7 @@ namespace SpaceRace
             #endregion
 
             #region Adding Bullets
-            if (bulletCounter == 5)
+            if (bulletCounter == 8)
             {
                 Bullets newBulletLeft = new Bullets(0 - bulletWidth, randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
                 left.Add(newBulletLeft);
@@ -148,7 +148,7 @@ namespace SpaceRace
             #endregion
 
             #region Moving Players
-            if (wDown == false)
+            if (wDown == true)
             {
                 player1Y -= player1Speed;
                 leftRec.Y -= player1Speed;

@@ -32,6 +32,7 @@ namespace SpaceRace
             SelectionScreen ss = new SelectionScreen();
             // Add the User Control to the Form
             f.Controls.Add(ss);
+            ss.Focus();
         }
 
         private void quitButton_Enter(object sender, EventArgs e)
@@ -66,6 +67,7 @@ namespace SpaceRace
             GameScreen1Player gs = new GameScreen1Player();
             // Add the User Control to the Form
             f.Controls.Add(gs);
+            gs.Focus();
         }
 
         private void highScoreButton_Enter(object sender, EventArgs e)

@@ -38,7 +38,7 @@
             this.resetPlayer2 = new System.Windows.Forms.Button();
             this.doubleSpeedPlayer2 = new System.Windows.Forms.Button();
             this.resetPlayer1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.intructionLabel = new System.Windows.Forms.Label();
             this.outputLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.p2PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1PictureBox)).BeginInit();
@@ -100,7 +100,7 @@
             // 
             // p2PictureBox
             // 
-            this.p2PictureBox.BackgroundImage = global::SpaceRace.Properties.Resources.kindpng_490723;
+            this.p2PictureBox.BackgroundImage = global::SpaceRace.Properties.Resources.Spaceship;
             this.p2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.p2PictureBox.Location = new System.Drawing.Point(275, 91);
             this.p2PictureBox.Name = "p2PictureBox";
@@ -110,7 +110,7 @@
             // 
             // p1PictureBox
             // 
-            this.p1PictureBox.BackgroundImage = global::SpaceRace.Properties.Resources.kindpng_490723;
+            this.p1PictureBox.BackgroundImage = global::SpaceRace.Properties.Resources.Spaceship;
             this.p1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.p1PictureBox.Location = new System.Drawing.Point(23, 91);
             this.p1PictureBox.Name = "p1PictureBox";
@@ -186,17 +186,17 @@
             this.resetPlayer1.Click += new System.EventHandler(this.resetPlayer1_Click);
             this.resetPlayer1.Enter += new System.EventHandler(this.resetPlayer1_Enter);
             // 
-            // label2
+            // intructionLabel
             // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Font = new System.Drawing.Font("Digital-7 Mono", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(23, 528);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(729, 111);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Each Player choose a powerup. Double speed doubles your speed, and reset opponent" +
+            this.intructionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.intructionLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.intructionLabel.Font = new System.Drawing.Font("Digital-7 Mono", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.intructionLabel.ForeColor = System.Drawing.Color.White;
+            this.intructionLabel.Location = new System.Drawing.Point(23, 528);
+            this.intructionLabel.Name = "intructionLabel";
+            this.intructionLabel.Size = new System.Drawing.Size(729, 111);
+            this.intructionLabel.TabIndex = 13;
+            this.intructionLabel.Text = "Each Player choose a powerup. Double speed doubles your speed, and reset opponent" +
     " will let you reset your opponents position twice.";
             // 
             // outputLabel
@@ -214,7 +214,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.outputLabel);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.intructionLabel);
             this.Controls.Add(this.resetPlayer1);
             this.Controls.Add(this.doubleSpeedPlayer2);
             this.Controls.Add(this.resetPlayer2);
@@ -246,7 +246,7 @@
         private System.Windows.Forms.Button resetPlayer2;
         private System.Windows.Forms.Button doubleSpeedPlayer2;
         private System.Windows.Forms.Button resetPlayer1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label intructionLabel;
         private System.Windows.Forms.Label outputLabel;
     }
 }

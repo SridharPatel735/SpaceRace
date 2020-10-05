@@ -1,4 +1,4 @@
-Blue
-Orange
-Red
-Brown
+1
+55
+10
+12

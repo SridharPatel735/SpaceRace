@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 
 namespace SpaceRace
 {
@@ -78,7 +79,7 @@ namespace SpaceRace
             Players.rightRecP1.Y = 784;
             Players.rightRecP1.Width = 10;
             Players.rightRecP1.Height = 24;
-            Players.shipImage = Properties.Resources.kindpng_490723;
+            Players.shipImage = Properties.Resources.Spaceship;
 
             Players.leftRecP2.X = 495;
             Players.leftRecP2.Y = 784;
@@ -94,7 +95,7 @@ namespace SpaceRace
             Players.rightRecP2.Y = 784;
             Players.rightRecP2.Width = 10;
             Players.rightRecP2.Height = 24;
-            Players.shipImage = Properties.Resources.kindpng_490723;
+            Players.shipImage = Properties.Resources.Spaceship;
 
             player1X = this.Width / 2 - 125;
             player1Y = this.Height - 50;
@@ -102,7 +103,7 @@ namespace SpaceRace
             player2Y = this.Height - 50;
 
             timerX = this.Width / 2 - 5;
-            timerY = this.Height;
+            timerY = this.Width;
 
             //add box
             for (int i = 0; i <= 10; i++)
@@ -256,13 +257,15 @@ namespace SpaceRace
             #endregion
 
             #region PowerUp
-            if (resetPlayer1 > 0 && vDown == true)
+            if (resetPlayer1 >= 0 && vDown == true)
             {
                 player1Y = this.Height - 50;
+                resetPlayer1--;
             }
-            if (resetPlayer2 > 0 && nDown == true)
+            if (resetPlayer2 >= 0 && nDown == true)
             {
                 player2Y = this.Height - 50;
+                resetPlayer2--;
             }
             #endregion
 
@@ -274,7 +277,7 @@ namespace SpaceRace
                 Players.middleRecP2.Y -= player2Speed;
                 Players.rightRecP2.Y -= player2Speed;
             }
-            if (sDown == true && player2Y + shipHeight >= this.Height)
+            if (sDown == true && player2Y + shipHeight <= this.Height)
             {
                 player2Y += player2Speed;
                 Players.leftRecP2.Y += player2Speed;
@@ -303,7 +306,7 @@ namespace SpaceRace
                 Players.middleRecP1.Y -= player1Speed;
                 Players.rightRecP1.Y -= player1Speed;
             }
-            if (downArrowDown == true && player1Y + shipHeight >= this.Height)
+            if (downArrowDown == true && player1Y + shipHeight <= this.Height)
             {
                 player1Y += player1Speed;
                 Players.leftRecP1.Y += player1Speed;
@@ -364,6 +367,7 @@ namespace SpaceRace
                     winner = "It's a Tie!";
                 }
                 winnerLabel.Text = winner;
+                Refresh();
                 Thread.Sleep(4000);
                 Form f = this.FindForm();
                 f.Controls.Remove(this);

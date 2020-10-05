@@ -44,6 +44,7 @@ namespace SpaceRace
             MainScreen ms = new MainScreen();
             // Add the User Control to the Form
             f.Controls.Add(ms);
+            ms.Focus();
         }
 
         private void startButton_Enter(object sender, EventArgs e)

@@ -118,12 +118,13 @@
             // highScoreLabel
             // 
             this.highScoreLabel.BackColor = System.Drawing.Color.Transparent;
+            this.highScoreLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.highScoreLabel.Font = new System.Drawing.Font("Digital-7 Mono", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.highScoreLabel.ForeColor = System.Drawing.Color.White;
             this.highScoreLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.highScoreLabel.Location = new System.Drawing.Point(360, 492);
+            this.highScoreLabel.Location = new System.Drawing.Point(491, 428);
             this.highScoreLabel.Name = "highScoreLabel";
-            this.highScoreLabel.Size = new System.Drawing.Size(125, 308);
+            this.highScoreLabel.Size = new System.Drawing.Size(179, 308);
             this.highScoreLabel.TabIndex = 6;
             // 
             // MainScreen
