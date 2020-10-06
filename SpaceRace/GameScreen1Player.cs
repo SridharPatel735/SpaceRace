@@ -61,9 +61,9 @@ namespace SpaceRace
             //add box
             for (int i = 0; i <= 10; i++)
             {
-                Bullets newBulletLeft = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
+                Bullets newBulletLeft = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), "Left");
                 left.Add(newBulletLeft);
-                Bullets newBulletRight = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
+                Bullets newBulletRight = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), "Right");
                 right.Add(newBulletRight);
             }
             gameTimer.Start();
@@ -137,10 +137,9 @@ namespace SpaceRace
             #region Adding Bullets
             if (bulletCounter == 8)
             {
-                Bullets newBulletLeft = new Bullets(0 - bulletWidth, randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
+                Bullets newBulletLeft = new Bullets(0 - 10, randGen.Next(0, this.Height - 100), "Left");
                 left.Add(newBulletLeft);
-
-                Bullets newBulletRight = new Bullets(this.Width, randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
+                Bullets newBulletRight = new Bullets(this.Width, randGen.Next(0, this.Height - 100), "Right");
                 right.Add(newBulletRight);
                 bulletCounter = 0;
             }
@@ -155,21 +154,21 @@ namespace SpaceRace
                 middleRec.Y -= player1Speed;
                 rightRec.Y -= player1Speed;
             }
-            if (sDown == true)
+            if (sDown == true && player1Y + shipHeight <= this.Height)
             {
                 player1Y += player1Speed;
                 leftRec.Y += player1Speed;
                 middleRec.Y += player1Speed;
                 rightRec.Y += player1Speed;
             }
-            if (aDown == true)
+            if (aDown == true && player1X >= 0)
             {
                 player1X -= player1Speed;
                 leftRec.X -= player1Speed;
                 middleRec.X -= player1Speed;
                 rightRec.X -= player1Speed;
             }
-            if (dDown == true)
+            if (dDown == true && player1X + shipWidth <= this.Width)
             {
                 player1X += player1Speed;
                 leftRec.X += player1Speed;

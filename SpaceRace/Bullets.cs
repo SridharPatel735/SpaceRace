@@ -8,14 +8,26 @@ namespace SpaceRace
 {
     class Bullets
     {
-        public int bulletX, bulletY, bulletWidth, bulletHeight;
+        public int bulletX, bulletY, bulletWidth = 10, bulletHeight = 5, bulletSpeed = 5;
+        public string direction;
 
-        public Bullets(int _bulletX, int _bulletY, int _bulletWidth, int _bulletHeight)
+        public Bullets(int _bulletX, int _bulletY, string _direction)
         {
             bulletX = _bulletX;
             bulletY = _bulletY;
-            bulletWidth = _bulletWidth;
-            bulletHeight = _bulletHeight;
+            direction = _direction;
+        }
+        public int BulletsMove(string direction, int bulletX)
+        {
+            if (direction == "Right")
+            {
+                bulletX -= bulletSpeed;
+            }
+            else
+            {
+                bulletX += bulletSpeed;
+            }
+            return (bulletX);
         }
     }
 }

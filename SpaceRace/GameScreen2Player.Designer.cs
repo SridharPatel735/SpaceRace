@@ -43,21 +43,24 @@
             // 
             // player2Score
             // 
+            this.player2Score.BackColor = System.Drawing.Color.Transparent;
             this.player2Score.Font = new System.Drawing.Font("Digital-7 Mono", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player2Score.ForeColor = System.Drawing.Color.White;
-            this.player2Score.Location = new System.Drawing.Point(717, 766);
+            this.player2Score.Location = new System.Drawing.Point(660, 766);
             this.player2Score.Name = "player2Score";
-            this.player2Score.Size = new System.Drawing.Size(83, 96);
+            this.player2Score.Size = new System.Drawing.Size(140, 96);
             this.player2Score.TabIndex = 0;
             this.player2Score.Text = "0";
+            this.player2Score.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // player1Score
             // 
+            this.player1Score.BackColor = System.Drawing.Color.Transparent;
             this.player1Score.Font = new System.Drawing.Font("Digital-7 Mono", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player1Score.ForeColor = System.Drawing.Color.White;
             this.player1Score.Location = new System.Drawing.Point(3, 766);
             this.player1Score.Name = "player1Score";
-            this.player1Score.Size = new System.Drawing.Size(83, 96);
+            this.player1Score.Size = new System.Drawing.Size(141, 96);
             this.player1Score.TabIndex = 1;
             this.player1Score.Text = "0";
             // 

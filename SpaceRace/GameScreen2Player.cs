@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Media;
+using System.Runtime.CompilerServices;
 
 namespace SpaceRace
 {
     public partial class GameScreen2Player : UserControl
     {
-        List<Bullets> left = new List<Bullets>();
-        List<Bullets> right = new List<Bullets>();
-        SpaceShip Players = new SpaceShip(Rectangle.Empty, Rectangle.Empty, Rectangle.Empty, Rectangle.Empty, Rectangle.Empty, Rectangle.Empty);
+        List<Bullets> bulletList = new List<Bullets>();
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush redBrush = new SolidBrush(Color.Red);
-        int shipWidth = 25;
-        int shipHeight = 45;
-        int bulletHeight = 5;
-        int bulletWidth = 10;
+        SpaceShip Player1 = new SpaceShip();
+        SpaceShip Player2 = new SpaceShip();
+        Bullets bullet = new Bullets(0, 0, "");
+        Image shipImage = Properties.Resources.Spaceship;
+        int shipWidth = 25, shipHeight = 45;
         int player1X, player1Y, player2X, player2Y, player1Speed, player2Speed;
         int player1Points = 0;
         int player2Points = 0;
@@ -31,7 +31,14 @@ namespace SpaceRace
         int resetPlayer1, resetPlayer2;
         int bulletCounter;
         Random randGen = new Random();
+        int leftRecP1X = 295, leftRecP1Y = 784;
+        int middleRecP1X = 302, middleRecP1Y = 784;
+        int rightRecP1X = 310, rightRecP1Y = 784;
+        int leftRecP2X = 495, leftRecP2Y = 784;
+        int middleRecP2X = 502, middleRecP2Y = 784;
+        int rightRecP2X = 510, rightRecP2Y = 784;
 
+        Boolean reset1, reset2;
         Boolean rightArrowDown, leftArrowDown, upArrowDown, downArrowDown, aDown, wDown, sDown, dDown, nDown, vDown;
 
         public GameScreen2Player()
@@ -47,9 +54,11 @@ namespace SpaceRace
             {
                 case 1:
                     player1Speed = 4;
+                    reset2 = false;
                     break;
                 case 2:
-                    resetPlayer2 = 2;
+                    reset2 = true;
+                    resetPlayer2 = 3;
                     player1Speed = 2;
                     break;
             }
@@ -58,44 +67,14 @@ namespace SpaceRace
             {
                 case 1:
                     player2Speed = 4;
+                    reset1 = false;
                     break;
                 case 2:
-                    resetPlayer1 = 2;
+                    reset1 = true;
+                    resetPlayer1 = 3;
                     player2Speed = 2;
                     break;
             }
-
-            Players.leftRecP1.X = 295;
-            Players.leftRecP1.Y = 784;
-            Players.leftRecP1.Width = 10;
-            Players.leftRecP1.Height = 24;
-
-            Players.middleRecP1.X = 302;
-            Players.middleRecP1.Y = 784;
-            Players.middleRecP1.Width = 10;
-            Players.middleRecP1.Height = 43;
-
-            Players.rightRecP1.X = 310;
-            Players.rightRecP1.Y = 784;
-            Players.rightRecP1.Width = 10;
-            Players.rightRecP1.Height = 24;
-            Players.shipImage = Properties.Resources.Spaceship;
-
-            Players.leftRecP2.X = 495;
-            Players.leftRecP2.Y = 784;
-            Players.leftRecP2.Width = 10;
-            Players.leftRecP2.Height = 24;
-
-            Players.middleRecP2.X = 502;
-            Players.middleRecP2.Y = 784;
-            Players.middleRecP2.Width = 10;
-            Players.middleRecP2.Height = 43;
-
-            Players.rightRecP2.X = 510;
-            Players.rightRecP2.Y = 784;
-            Players.rightRecP2.Width = 10;
-            Players.rightRecP2.Height = 24;
-            Players.shipImage = Properties.Resources.Spaceship;
 
             player1X = this.Width / 2 - 125;
             player1Y = this.Height - 50;
@@ -103,15 +82,15 @@ namespace SpaceRace
             player2Y = this.Height - 50;
 
             timerX = this.Width / 2 - 5;
-            timerY = this.Width;
+            timerY = this.Height;
 
             //add box
             for (int i = 0; i <= 10; i++)
             {
-                Bullets newBulletLeft = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
-                left.Add(newBulletLeft);
-                Bullets newBulletRight = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
-                right.Add(newBulletRight);
+                Bullets newBulletLeft = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), "Left");
+                bulletList.Add(newBulletLeft);
+                Bullets newBulletRight = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), "Right");
+                bulletList.Add(newBulletRight);
             }
         }
 
@@ -144,10 +123,16 @@ namespace SpaceRace
                     dDown = true;
                     break;
                 case Keys.N:
-                    nDown = true;
+                    if (reset1 == true)
+                    {
+                        nDown = true;
+                    }
                     break;
                 case Keys.V:
-                    vDown = true;
+                    if (reset2 == true)
+                    {
+                        vDown = true;
+                    }
                     break;
             }
         }
@@ -192,65 +177,19 @@ namespace SpaceRace
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             #region Collisions
-            if (left.Count >= right.Count)
+            foreach (Bullets x in bulletList)
             {
-                for (int i = 0; i < right.Count; i++)
-                {
-                    Rectangle leftBullets = new Rectangle(left[i].bulletX, left[i].bulletY, left[i].bulletWidth, left[i].bulletHeight);
-                    Rectangle rightBullets = new Rectangle(right[i].bulletX, right[i].bulletY, right[i].bulletWidth, right[i].bulletHeight);
-
-                    if (leftBullets.IntersectsWith(Players.leftRecP1) || leftBullets.IntersectsWith(Players.middleRecP1) || leftBullets.IntersectsWith(Players.rightRecP1) || rightBullets.IntersectsWith(Players.leftRecP1) || rightBullets.IntersectsWith(Players.middleRecP1) || rightBullets.IntersectsWith(Players.rightRecP1))
-                    {
-                        player1X = this.Width / 2 - 125;
-                        player1Y = this.Height - 50;
-
-                        Players.leftRecP1.X = 295;
-                        Players.leftRecP1.Y = 784;
-                        Players.leftRecP1.Width = 10;
-                        Players.leftRecP1.Height = 24;
-
-                        Players.middleRecP1.X = 302;
-                        Players.middleRecP1.Y = 784;
-                        Players.middleRecP1.Width = 10;
-                        Players.middleRecP1.Height = 43;
-
-                        Players.rightRecP1.X = 310;
-                        Players.rightRecP1.Y = 784;
-                        Players.rightRecP1.Width = 10;
-                        Players.rightRecP1.Height = 24;
-                    }
-                    //if (leftBullets.IntersectsWith(Players.leftRecP2) || leftBullets.IntersectsWith(Players.middleRecP2) || leftBullets.IntersectsWith(Players.rightRecP2) || rightBullets.IntersectsWith(Players.leftRecP2) || rightBullets.IntersectsWith(Players.middleRecP2) || rightBullets.IntersectsWith(Players.rightRecP2))
-                    //{
-                    //    player2X = this.Width / 2 + 100;
-                    //    player2Y = this.Height - 50;
-
-                    //    Players.leftRecP2.X = 495;
-                    //    Players.leftRecP2.Y = 784;
-                    //    Players.leftRecP2.Width = 10;
-                    //    Players.leftRecP2.Height = 24;
-
-                    //    Players.middleRecP2.X = 502;
-                    //    Players.middleRecP2.Y = 784;
-                    //    Players.middleRecP2.Width = 10;
-                    //    Players.middleRecP2.Height = 43;
-
-                    //    Players.rightRecP2.X = 510;
-                    //    Players.rightRecP2.Y = 784;
-                    //    Players.rightRecP2.Width = 10;
-                    //    Players.rightRecP2.Height = 24;
-                    //}
-                }
+                Player1.Collision(x.bulletX, x.bulletY, this.Width, this.Height);
             }
             #endregion
 
             #region Adding Bullets
             if (bulletCounter == 8)
             {
-                Bullets newBulletLeft = new Bullets(0 - bulletWidth, randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
-                left.Add(newBulletLeft);
-
-                Bullets newBulletRight = new Bullets(this.Width, randGen.Next(0, this.Height - 100), bulletWidth, bulletHeight);
-                right.Add(newBulletRight);
+                Bullets newBulletLeft = new Bullets(0 - 10, randGen.Next(0, this.Height - 100), "Left");
+                bulletList.Add(newBulletLeft);
+                Bullets newBulletRight = new Bullets(this.Width, randGen.Next(0, this.Height - 100), "Right");
+                bulletList.Add(newBulletRight);
                 bulletCounter = 0;
             }
             bulletCounter++;
@@ -261,82 +200,66 @@ namespace SpaceRace
             {
                 player1Y = this.Height - 50;
                 resetPlayer1--;
+                leftRecP1X = 295;
+                leftRecP1Y = 784;
+                middleRecP1X = 302;
+                middleRecP1Y = 784;
+                rightRecP1X = 310;
+                rightRecP1Y = 784;
             }
             if (resetPlayer2 >= 0 && nDown == true)
             {
                 player2Y = this.Height - 50;
                 resetPlayer2--;
+                leftRecP2X = 495;
+                leftRecP2Y = 784;
+                middleRecP2X = 502;
+                middleRecP2Y = 784;
+                rightRecP2X = 510;
+                rightRecP2Y = 784;
             }
             #endregion
 
             #region Moving Players
             if (wDown == true)
             {
-                player2Y -= player2Speed;
-                Players.leftRecP2.Y -= player2Speed;
-                Players.middleRecP2.Y -= player2Speed;
-                Players.rightRecP2.Y -= player2Speed;
+                player2Y = Player2.Player2MoveUpDown(player2Speed, "Up");
             }
             if (sDown == true && player2Y + shipHeight <= this.Height)
             {
-                player2Y += player2Speed;
-                Players.leftRecP2.Y += player2Speed;
-                Players.middleRecP2.Y += player2Speed;
-                Players.rightRecP2.Y += player2Speed;
+                player2Y = Player2.Player2MoveUpDown(player2Speed, "Down");
             }
             if (aDown == true && player2X >= 0)
             {
-                player2X -= player2Speed;
-                Players.leftRecP2.X -= player2Speed;
-                Players.middleRecP2.X -= player2Speed;
-                Players.rightRecP2.X -= player2Speed;
+                player2X = Player2.Player2MoveLeftRight(player2Speed, "Left");
             }
             if (dDown == true && player2X + shipWidth <= this.Width)
             {
-                player2X += player2Speed;
-                Players.leftRecP2.X += player2Speed;
-                Players.middleRecP2.X += player2Speed;
-                Players.rightRecP2.X += player2Speed;
+                player2X = Player2.Player2MoveLeftRight(player2Speed, "Right");
             }
 
             if (upArrowDown == true)
             {
-                player1Y -= player1Speed;
-                Players.leftRecP1.Y -= player1Speed;
-                Players.middleRecP1.Y -= player1Speed;
-                Players.rightRecP1.Y -= player1Speed;
+                player1Y = Player1.Player1MoveUpDown(player1Speed, "Up");
             }
             if (downArrowDown == true && player1Y + shipHeight <= this.Height)
             {
-                player1Y += player1Speed;
-                Players.leftRecP1.Y += player1Speed;
-                Players.middleRecP1.Y += player1Speed;
-                Players.rightRecP1.Y += player1Speed;
+                player1Y = Player1.Player1MoveUpDown(player1Speed, "Down");
             }
             if (leftArrowDown == true && player1X >= 0)
             {
-                player1X -= player1Speed;
-                Players.leftRecP1.X -= player1Speed;
-                Players.middleRecP1.X -= player1Speed;
-                Players.rightRecP1.X -= player1Speed;
+                player1X = Player1.Player1MoveLeftRight(player1Speed, "Left");
             }
             if (rightArrowDown == true && player1X + shipWidth <= this.Width)
             {
-                player1X += player1Speed;
-                Players.leftRecP1.X += player1Speed;
-                Players.middleRecP1.X += player1Speed;
-                Players.rightRecP1.X += player1Speed;
+                player1X = Player1.Player1MoveLeftRight(player1Speed, "Right");
             }
             #endregion
 
             #region Moving Bullets
-            foreach (Bullets x in left)
+            foreach (Bullets x in bulletList)
             {
-                x.bulletX += 5;
-            }
-            foreach (Bullets x in right)
-            {
-                x.bulletX -= 5;
+                x.bulletX = bullet.BulletsMove(x.direction, x.bulletX);
             }
             #endregion
 
@@ -379,62 +302,28 @@ namespace SpaceRace
             #endregion
 
             #region Removing Bullets
-            if (left[0].bulletX >= this.Width)
+            if (bulletList[0].bulletX >= this.Width || bulletList[0].bulletX <= 0)
             {
-                left.RemoveAt(0);
-            }
-            if (right[0].bulletX + bulletWidth <= 0)
-            {
-                right.RemoveAt(0);
+                bulletList.RemoveAt(0);
             }
             #endregion
 
             #region Score
-            if (player1Y + shipHeight <= 0 )
+            if (player1Y + shipHeight <= 0)
             {
-                player1Points++;
-                player1Score.Text = "" + player1Points; 
-
                 player1X = this.Width / 2 - 125;
                 player1Y = this.Height - 50;
-
-                Players.leftRecP1.X = 295;
-                Players.leftRecP1.Y = 784;
-                Players.leftRecP1.Width = 10;
-                Players.leftRecP1.Height = 24;
-
-                Players.middleRecP1.X = 302;
-                Players.middleRecP1.Y = 784;
-                Players.middleRecP1.Width = 10;
-                Players.middleRecP1.Height = 43;
-
-                Players.rightRecP1.X = 310;
-                Players.rightRecP1.Y = 784;
-                Players.rightRecP1.Width = 10;
-                Players.rightRecP1.Height = 24;
+                player1Points++;
+                player1Score.Text = "" + player1Points;
+                Player1.Player1Score(player1X, player1Y);
             }
             if (player2Y + shipHeight <= 0)
             {
-                player2Points++;
-                player2Score.Text = "" + player2Points;
-
                 player2X = this.Width / 2 + 100;
                 player2Y = this.Height - 50;
-
-                Players.leftRecP2.X = 495;
-                Players.leftRecP2.Y = 784;
-                Players.leftRecP2.Width = 10;
-                Players.leftRecP2.Height = 24;
-
-                Players.middleRecP2.X = 502;
-                Players.middleRecP2.Y = 784;
-                Players.middleRecP2.Width = 10;
-                Players.middleRecP2.Height = 43;
-
-                Players.rightRecP2.X = 510;
-                Players.rightRecP2.Y = 784;
-                Players.rightRecP2.Width = 10;
-                Players.rightRecP2.Height = 24;
+                player2Points++;
+                player2Score.Text = "" + player2Points;
+                Player2.Player2Score(player2X, player2Y);
             }
             #endregion
 
@@ -444,16 +333,12 @@ namespace SpaceRace
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.FillRectangle(redBrush, timerX, timerY, 10, this.Height);
-            foreach (Bullets b in left)
+            foreach (Bullets b in bulletList)
             {
                 e.Graphics.FillRectangle(whiteBrush, b.bulletX, b.bulletY, b.bulletWidth, b.bulletHeight);
             }
-            foreach (Bullets b in right)
-            {
-                e.Graphics.FillRectangle(whiteBrush, b.bulletX, b.bulletY, b.bulletWidth, b.bulletHeight);
-            }
-            e.Graphics.DrawImage(Players.shipImage, player1X, player1Y, shipWidth, shipHeight);
-            e.Graphics.DrawImage(Players.shipImage, player2X, player2Y, shipWidth, shipHeight);
+            e.Graphics.DrawImage(shipImage, player1X, player1Y, shipWidth, shipHeight);
+            e.Graphics.DrawImage(shipImage, player2X, player2Y, shipWidth, shipHeight);
         }
     }
 }
