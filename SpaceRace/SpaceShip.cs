@@ -13,6 +13,7 @@ namespace SpaceRace
         int bulletWidth = 10, bulletHeight = 5;
         public int X, Y, startX, startY;
         public Image shipImage = Properties.Resources.Spaceship;
+        public int sideRecWidth = 7, middleRecWidth = 11, sideRecHeight = 20, middleRecHeight = 45;
 
         public SpaceShip(int _playerX, int _playerY)
         {
@@ -79,15 +80,20 @@ namespace SpaceRace
                 X = width / 2 - 125;
                 Y = height - 50;
 
-                    
+
                 //Rec1.X = Player1.X
                 //Rec1.Y = Player1.Y + 25;
                 //Rec2.X = Player1.X + sideRecWidth;
                 //Rec2.Y = Player1.Y;
                 //Rec3.X = Player1.X + sideRecWidth + middleRecWidth;
+                //Rec3.Y = Player1.Y + 25;
             }
             if (Bullets.IntersectsWith(leftRec) || Bullets.IntersectsWith(middleRec) || Bullets.IntersectsWith(rightRec))
             {
+                Rectangle leftRec = new Rectangle(X, Y + 25, sideRecWidth, sideRecHeight);
+                Rectangle middleRec = new Rectangle(X + sideRecWidth, Y, middleRecWidth, middleRecHeight);
+                Rectangle rightRec = new Rectangle(X + sideRecWidth + middleRecWidth, Y + 25, sideRecWidth, sideRecHeight);
+
                 X = width / 2 + 100;
                 Y = height - 50;
             }

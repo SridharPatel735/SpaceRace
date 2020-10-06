@@ -92,14 +92,15 @@ namespace SpaceRace
             //Rec2.X = Player1.X + sideRecWidth;
             //Rec2.Y = Player1.Y;
             //Rec3.X = Player1.X + sideRecWidth + middleRecWidth;
+            //Rec3.Y = Player1.Y + 25;
 
             //Lrecp1X = 141, Lrecp1Y = 550, Lrecp1Width = 7, Lrecp1Height = 20;
             //Mrecp1X = 148, Mrecp1Y = 525, Mrecp1Width = 11, Mrecp1Height = 45;
-            //Rrecp1X = 159, Rrecp1X = 550, Rrecp1Width = 7, Rrecp1Height = 20;
+            //Rrecp1X = 159, Rrecp1Y = 550, Rrecp1Width = 7, Rrecp1Height = 20;
 
             //Lrecp2X = 366, Lrecp2Y = 550, Lrecp2Width = 7, Lrecp2Height = 20;
             //Mrecp2X = 373, Mrecp2Y = 525, Mrecp2Width = 11, Mrecp2Height = 45;
-            //Rrecp2X = 384, Rrecp2X = 550, Rrecp2Width = 7, Rrecp2Height = 20;
+            //Rrecp2X = 384, Rrecp2Y = 550, Rrecp2Width = 7, Rrecp2Height = 20;
 
             Player1.X = this.Width / 2 - 125;
             Player1.Y = this.Height - 50;
