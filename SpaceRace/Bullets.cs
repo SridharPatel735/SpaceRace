@@ -17,7 +17,7 @@ namespace SpaceRace
             bulletY = _bulletY;
             direction = _direction;
         }
-        public int BulletsMove(string direction, int bulletX)
+        public int BulletsMove()
         {
             if (direction == "Right")
             {

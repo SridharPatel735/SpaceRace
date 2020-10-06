@@ -18,12 +18,12 @@ namespace SpaceRace
         List<Bullets> bulletList = new List<Bullets>();
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush redBrush = new SolidBrush(Color.Red);
-        SpaceShip Player1 = new SpaceShip();
-        SpaceShip Player2 = new SpaceShip();
+        SpaceShip Player1 = new SpaceShip(0, 0);
+        SpaceShip Player2 = new SpaceShip(0, 0);
         Bullets bullet = new Bullets(0, 0, "");
         Image shipImage = Properties.Resources.Spaceship;
         int shipWidth = 25, shipHeight = 45;
-        int player1X, player1Y, player2X, player2Y, player1Speed, player2Speed;
+        int player1Speed, player2Speed;
         int player1Points = 0;
         int player2Points = 0;
         string winner;
@@ -76,10 +76,35 @@ namespace SpaceRace
                     break;
             }
 
-            player1X = this.Width / 2 - 125;
-            player1Y = this.Height - 50;
-            player2X = this.Width / 2 + 100;
-            player2Y = this.Height - 50;
+            //p1X = 141
+            //p1Y = 525
+
+            //p2X = 366
+            //p2Y = 525
+
+            //sideRecWidth = 7;
+            //middleRecWidth = 11;
+            //sideRecHeight = 20;
+            //middleRecHeight = 45;
+
+            //Rec1.X = Player1.X
+            //Rec1.Y = Player1.Y + 25;
+            //Rec2.X = Player1.X + sideRecWidth;
+            //Rec2.Y = Player1.Y;
+            //Rec3.X = Player1.X + sideRecWidth + middleRecWidth;
+
+            //Lrecp1X = 141, Lrecp1Y = 550, Lrecp1Width = 7, Lrecp1Height = 20;
+            //Mrecp1X = 148, Mrecp1Y = 525, Mrecp1Width = 11, Mrecp1Height = 45;
+            //Rrecp1X = 159, Rrecp1X = 550, Rrecp1Width = 7, Rrecp1Height = 20;
+
+            //Lrecp2X = 366, Lrecp2Y = 550, Lrecp2Width = 7, Lrecp2Height = 20;
+            //Mrecp2X = 373, Mrecp2Y = 525, Mrecp2Width = 11, Mrecp2Height = 45;
+            //Rrecp2X = 384, Rrecp2X = 550, Rrecp2Width = 7, Rrecp2Height = 20;
+
+            Player1.X = this.Width / 2 - 125;
+            Player1.Y = this.Height - 50;
+            Player2.X = this.Width / 2 + 100;
+            Player2.Y = this.Height - 50;
 
             timerX = this.Width / 2 - 5;
             timerY = this.Height;
@@ -198,7 +223,7 @@ namespace SpaceRace
             #region PowerUp
             if (resetPlayer1 >= 0 && vDown == true)
             {
-                player1Y = this.Height - 50;
+                Player1.Y = this.Height - 50;
                 resetPlayer1--;
                 leftRecP1X = 295;
                 leftRecP1Y = 784;
@@ -209,7 +234,7 @@ namespace SpaceRace
             }
             if (resetPlayer2 >= 0 && nDown == true)
             {
-                player2Y = this.Height - 50;
+                Player2.Y = this.Height - 50;
                 resetPlayer2--;
                 leftRecP2X = 495;
                 leftRecP2Y = 784;
@@ -223,43 +248,43 @@ namespace SpaceRace
             #region Moving Players
             if (wDown == true)
             {
-                player2Y = Player2.Player2MoveUpDown(player2Speed, "Up");
+                Player2.PlayerMoveUpDown(player2Speed, "Up");
             }
-            if (sDown == true && player2Y + shipHeight <= this.Height)
+            if (sDown == true && Player2.X + shipHeight <= this.Height)
             {
-                player2Y = Player2.Player2MoveUpDown(player2Speed, "Down");
+                Player2.PlayerMoveUpDown(player2Speed, "Down");
             }
-            if (aDown == true && player2X >= 0)
+            if (aDown == true && Player2.X >= 0)
             {
-                player2X = Player2.Player2MoveLeftRight(player2Speed, "Left");
+                Player2.PlayerMoveLeftRight(player2Speed, "Left");
             }
-            if (dDown == true && player2X + shipWidth <= this.Width)
+            if (dDown == true && Player2.X + shipWidth <= this.Width)
             {
-                player2X = Player2.Player2MoveLeftRight(player2Speed, "Right");
+                Player2.PlayerMoveLeftRight(player2Speed, "Right");
             }
 
             if (upArrowDown == true)
             {
-                player1Y = Player1.Player1MoveUpDown(player1Speed, "Up");
+                Player1.PlayerMoveUpDown(player1Speed, "Up");
             }
-            if (downArrowDown == true && player1Y + shipHeight <= this.Height)
+            if (downArrowDown == true && Player1.Y + shipHeight <= this.Height)
             {
-                player1Y = Player1.Player1MoveUpDown(player1Speed, "Down");
+                Player1.PlayerMoveUpDown(player1Speed, "Down");
             }
-            if (leftArrowDown == true && player1X >= 0)
+            if (leftArrowDown == true && Player1.X >= 0)
             {
-                player1X = Player1.Player1MoveLeftRight(player1Speed, "Left");
+                Player1.PlayerMoveLeftRight(player1Speed, "Left");
             }
-            if (rightArrowDown == true && player1X + shipWidth <= this.Width)
+            if (rightArrowDown == true && Player1.X + shipWidth <= this.Width)
             {
-                player1X = Player1.Player1MoveLeftRight(player1Speed, "Right");
+                Player1.PlayerMoveLeftRight(player1Speed, "Right");
             }
             #endregion
 
             #region Moving Bullets
             foreach (Bullets x in bulletList)
             {
-                x.bulletX = bullet.BulletsMove(x.direction, x.bulletX);
+                x.BulletsMove();
             }
             #endregion
 
@@ -309,21 +334,21 @@ namespace SpaceRace
             #endregion
 
             #region Score
-            if (player1Y + shipHeight <= 0)
+            if (Player1.Y + shipHeight <= 0)
             {
-                player1X = this.Width / 2 - 125;
-                player1Y = this.Height - 50;
+                Player1.X = this.Width / 2 - 125;
+                Player1.Y = this.Height - 50;
                 player1Points++;
                 player1Score.Text = "" + player1Points;
-                Player1.Player1Score(player1X, player1Y);
+                Player1.PlayerScore();
             }
-            if (player2Y + shipHeight <= 0)
+            if (Player2.Y + shipHeight <= 0)
             {
-                player2X = this.Width / 2 + 100;
-                player2Y = this.Height - 50;
+                Player2.X = this.Width / 2 + 100;
+                Player2.Y = this.Height - 50;
                 player2Points++;
                 player2Score.Text = "" + player2Points;
-                Player2.Player2Score(player2X, player2Y);
+                Player2.PlayerScore();
             }
             #endregion
 
@@ -337,8 +362,8 @@ namespace SpaceRace
             {
                 e.Graphics.FillRectangle(whiteBrush, b.bulletX, b.bulletY, b.bulletWidth, b.bulletHeight);
             }
-            e.Graphics.DrawImage(shipImage, player1X, player1Y, shipWidth, shipHeight);
-            e.Graphics.DrawImage(shipImage, player2X, player2Y, shipWidth, shipHeight);
+            e.Graphics.DrawImage(shipImage, Player1.X, Player1.Y, shipWidth, shipHeight);
+            e.Graphics.DrawImage(shipImage, Player2.X, Player2.Y, shipWidth, shipHeight);
         }
     }
 }
