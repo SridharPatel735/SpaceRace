@@ -13,7 +13,8 @@ namespace SpaceRace
 {
     public partial class MainScreen : UserControl
     {
-        List<HighScore> scores = new List<HighScore>();
+        List<HighScore> highScoreList2Player = new List<HighScore>();
+        List<HighScore> highScoreList1Player = new List<HighScore>();
         public MainScreen()
         {
             InitializeComponent();
@@ -80,36 +81,7 @@ namespace SpaceRace
 
         private void highScoreButton_Click(object sender, EventArgs e)
         {
-            List<string> scoreList = File.ReadAllLines("HighScore.txt").ToList();
-            for (int i = 0; i < scoreList.Count; i += 2)
-            {
-                int score = Convert.ToInt32(scoreList[i + 1]);
-                HighScore hs = new HighScore(score);
-                scores.Add(hs);
-            }
-            // list to store all values from object list as strings
-            List<string> highscoreList = new List<string>();
 
-            // Add all info from each HighScore object to temp list
-            foreach (HighScore hs in scores)
-            {
-                highscoreList.Add(Convert.ToString(hs.score));
-            }
-
-            scores = scores.OrderByDescending(x => x.score).ToList();
-
-            File.WriteAllLines("HighScore.txt", highscoreList);
-
-            DisplayResults();
-        }
-        public void DisplayResults()
-        {
-            highScoreLabel.Text = "";
-
-            foreach (HighScore hs in scores)
-            {
-                highScoreLabel.Text += hs.score + "\n";
-            }
         }
     }
 }

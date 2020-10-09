@@ -36,6 +36,7 @@
             // 
             // playerScore
             // 
+            this.playerScore.BackColor = System.Drawing.Color.Transparent;
             this.playerScore.Font = new System.Drawing.Font("Digital-7 Mono", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerScore.ForeColor = System.Drawing.Color.White;
             this.playerScore.Location = new System.Drawing.Point(3, 766);
@@ -56,7 +57,7 @@
             this.winnerLabel.ForeColor = System.Drawing.Color.White;
             this.winnerLabel.Location = new System.Drawing.Point(162, 149);
             this.winnerLabel.Name = "winnerLabel";
-            this.winnerLabel.Size = new System.Drawing.Size(460, 76);
+            this.winnerLabel.Size = new System.Drawing.Size(460, 119);
             this.winnerLabel.TabIndex = 3;
             this.winnerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -67,13 +68,14 @@
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.winnerLabel);
             this.Controls.Add(this.playerScore);
+            this.DoubleBuffered = true;
             this.Name = "GameScreen1Player";
             this.Size = new System.Drawing.Size(800, 862);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen1Player_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameScreen1Player_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen1Player_KeyUp);
             this.ResumeLayout(false);
-            DoubleBuffered = true;
+
         }
 
         #endregion

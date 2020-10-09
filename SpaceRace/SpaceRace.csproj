@@ -123,10 +123,15 @@
     <None Include="Resources\kindpng_490723.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HighScore.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\414209__jacksonacademyashmore__death.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\SpaceRace.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HighScore1Player.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

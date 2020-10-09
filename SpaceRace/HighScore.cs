@@ -8,11 +8,6 @@ namespace SpaceRace
 {
     class HighScore
     {
-        public int score;
 
-        public HighScore(int _score)
-        {
-            score = _score;
-        }
     }
 }

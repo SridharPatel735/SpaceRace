@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Media;
 using System.Runtime.CompilerServices;
+using System.Xml;
 
 namespace SpaceRace
 {
@@ -17,26 +18,20 @@ namespace SpaceRace
     {
         List<Bullets> bulletList = new List<Bullets>();
         SolidBrush whiteBrush = new SolidBrush(Color.White);
-        SolidBrush redBrush = new SolidBrush(Color.Red);
-        SpaceShip Player1 = new SpaceShip(0, 0);
-        SpaceShip Player2 = new SpaceShip(0, 0);
-        Bullets bullet = new Bullets(0, 0, "");
+        SolidBrush redBrush = new SolidBrush(Color.OrangeRed);
+        SpaceShip Player1 = new SpaceShip(533 / 2 - 125, 575 - 50);
+        SpaceShip Player2 = new SpaceShip(533 / 2 + 100, 575 - 50);
         Image shipImage = Properties.Resources.Spaceship;
         int shipWidth = 25, shipHeight = 45;
         int player1Speed, player2Speed;
         int player1Points = 0;
         int player2Points = 0;
         string winner;
+        int winnerHighScore;
         int timerCounter, timerX, timerY;
         int resetPlayer1, resetPlayer2;
         int bulletCounter;
         Random randGen = new Random();
-        int leftRecP1X = 295, leftRecP1Y = 784;
-        int middleRecP1X = 302, middleRecP1Y = 784;
-        int rightRecP1X = 310, rightRecP1Y = 784;
-        int leftRecP2X = 495, leftRecP2Y = 784;
-        int middleRecP2X = 502, middleRecP2Y = 784;
-        int rightRecP2X = 510, rightRecP2Y = 784;
 
         Boolean reset1, reset2;
         Boolean rightArrowDown, leftArrowDown, upArrowDown, downArrowDown, aDown, wDown, sDown, dDown, nDown, vDown;
@@ -58,7 +53,7 @@ namespace SpaceRace
                     break;
                 case 2:
                     reset2 = true;
-                    resetPlayer2 = 3;
+                    resetPlayer2 = 4;
                     player1Speed = 2;
                     break;
             }
@@ -71,41 +66,10 @@ namespace SpaceRace
                     break;
                 case 2:
                     reset1 = true;
-                    resetPlayer1 = 3;
+                    resetPlayer1 = 4;
                     player2Speed = 2;
                     break;
             }
-
-            //p1X = 141
-            //p1Y = 525
-
-            //p2X = 366
-            //p2Y = 525
-
-            //sideRecWidth = 7;
-            //middleRecWidth = 11;
-            //sideRecHeight = 20;
-            //middleRecHeight = 45;
-
-            //Rec1.X = Player1.X
-            //Rec1.Y = Player1.Y + 25;
-            //Rec2.X = Player1.X + sideRecWidth;
-            //Rec2.Y = Player1.Y;
-            //Rec3.X = Player1.X + sideRecWidth + middleRecWidth;
-            //Rec3.Y = Player1.Y + 25;
-
-            //Lrecp1X = 141, Lrecp1Y = 550, Lrecp1Width = 7, Lrecp1Height = 20;
-            //Mrecp1X = 148, Mrecp1Y = 525, Mrecp1Width = 11, Mrecp1Height = 45;
-            //Rrecp1X = 159, Rrecp1Y = 550, Rrecp1Width = 7, Rrecp1Height = 20;
-
-            //Lrecp2X = 366, Lrecp2Y = 550, Lrecp2Width = 7, Lrecp2Height = 20;
-            //Mrecp2X = 373, Mrecp2Y = 525, Mrecp2Width = 11, Mrecp2Height = 45;
-            //Rrecp2X = 384, Rrecp2Y = 550, Rrecp2Width = 7, Rrecp2Height = 20;
-
-            Player1.X = this.Width / 2 - 125;
-            Player1.Y = this.Height - 50;
-            Player2.X = this.Width / 2 + 100;
-            Player2.Y = this.Height - 50;
 
             timerX = this.Width / 2 - 5;
             timerY = this.Height;
@@ -205,7 +169,8 @@ namespace SpaceRace
             #region Collisions
             foreach (Bullets x in bulletList)
             {
-                Player1.Collision(x.bulletX, x.bulletY, this.Width, this.Height);
+                Player1.Collision(x.bulletX, x.bulletY);
+                Player2.Collision(x.bulletX, x.bulletY);
             }
             #endregion
 
@@ -224,25 +189,13 @@ namespace SpaceRace
             #region PowerUp
             if (resetPlayer1 >= 0 && vDown == true)
             {
-                Player1.Y = this.Height - 50;
+                Player1.Reset();
                 resetPlayer1--;
-                leftRecP1X = 295;
-                leftRecP1Y = 784;
-                middleRecP1X = 302;
-                middleRecP1Y = 784;
-                rightRecP1X = 310;
-                rightRecP1Y = 784;
             }
             if (resetPlayer2 >= 0 && nDown == true)
             {
-                Player2.Y = this.Height - 50;
+                Player2.Reset();
                 resetPlayer2--;
-                leftRecP2X = 495;
-                leftRecP2Y = 784;
-                middleRecP2X = 502;
-                middleRecP2Y = 784;
-                rightRecP2X = 510;
-                rightRecP2Y = 784;
             }
             #endregion
 
@@ -251,7 +204,7 @@ namespace SpaceRace
             {
                 Player2.PlayerMoveUpDown(player2Speed, "Up");
             }
-            if (sDown == true && Player2.X + shipHeight <= this.Height)
+            if (sDown == true && Player2.Y + shipHeight <= this.Height)
             {
                 Player2.PlayerMoveUpDown(player2Speed, "Down");
             }
@@ -302,6 +255,23 @@ namespace SpaceRace
             if (timerY == -5)
             {
                 gameTimer.Stop();
+                if (player1Points >= player2Points)
+                {
+                    winnerHighScore = player1Points;
+                }
+                else
+                {
+                    winnerHighScore = player2Points;
+                }
+                //if (MainScreen.highScoreList2Player.Contains(winnerHighScore))
+                //{}
+                //else
+                //{
+                //    MainScreen.highScoreList2Player.Add(winnerHighScore);
+                //}
+
+
+                //MainScreen.highScoreList2Player.Add();
                 winnerLabel.Visible = true;
                 if (player1Points > player2Points)
                 {
@@ -337,19 +307,15 @@ namespace SpaceRace
             #region Score
             if (Player1.Y + shipHeight <= 0)
             {
-                Player1.X = this.Width / 2 - 125;
-                Player1.Y = this.Height - 50;
+                Player1.PlayerScore();
                 player1Points++;
                 player1Score.Text = "" + player1Points;
-                Player1.PlayerScore();
             }
             if (Player2.Y + shipHeight <= 0)
             {
-                Player2.X = this.Width / 2 + 100;
-                Player2.Y = this.Height - 50;
+                Player2.PlayerScore();
                 player2Points++;
                 player2Score.Text = "" + player2Points;
-                Player2.PlayerScore();
             }
             #endregion
 

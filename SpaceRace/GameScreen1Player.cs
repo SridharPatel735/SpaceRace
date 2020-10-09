@@ -8,22 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Xml;
 
 namespace SpaceRace
 {
     public partial class GameScreen1Player : UserControl
     {
-        List<Bullets> left = new List<Bullets>();
-        List<Bullets> right = new List<Bullets>();
-        List<HighScore> score = new List<HighScore>();
+        List<Bullets> bulletList = new List<Bullets>();
+        SpaceShip Player1 = new SpaceShip(533 / 2 - 125, 575 - 50);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
-        Rectangle leftRec, middleRec, rightRec;
         Image shipImage = Properties.Resources.Spaceship;
         int shipWidth = 25;
         int shipHeight = 45;
         int bulletHeight = 5;
         int bulletWidth = 10;
-        int player1X, player1Y, player1Speed;
+        int player1Speed;
         int player1Points = 0;
         int bulletCounter;
         Random randGen = new Random();
@@ -37,34 +36,15 @@ namespace SpaceRace
 
         private void SetParameters()
         {
-            winnerLabel.Visible = false;
-            leftRec.X = 295;
-            leftRec.Y = 784;
-            leftRec.Width = 10;
-            leftRec.Height = 24;
-
-            middleRec.X = 302;
-            middleRec.Y = 784;
-            middleRec.Width = 10;
-            middleRec.Height = 43;
-
-            rightRec.X = 310;
-            rightRec.Y = 784;
-            rightRec.Width = 10;
-            rightRec.Height = 24;
-
-            player1X = this.Width / 2 - 125;
-            player1Y = this.Height - 50;
-
+            winnerLabel.Text = "";
             player1Speed = 2;
-
             //add box
             for (int i = 0; i <= 10; i++)
             {
                 Bullets newBulletLeft = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), "Left");
-                left.Add(newBulletLeft);
+                bulletList.Add(newBulletLeft);
                 Bullets newBulletRight = new Bullets(randGen.Next(0, this.Width), randGen.Next(0, this.Height - 100), "Right");
-                right.Add(newBulletRight);
+                bulletList.Add(newBulletRight);
             }
             gameTimer.Start();
         }
@@ -110,37 +90,31 @@ namespace SpaceRace
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             #region Collision
-            //if (left.Count >= 22)
-            //{
-            //    for (int i = 0; i <= 22; i++)
-            //    {
-            //        Rectangle leftBullets = new Rectangle(left[i].bulletX, left[i].bulletY, left[i].bulletWidth, left[i].bulletHeight);
-            //        Rectangle rightBullets = new Rectangle(right[i].bulletX, right[i].bulletY, right[i].bulletWidth, right[i].bulletHeight);
-
-            //        if (leftBullets.IntersectsWith(leftRec) || leftBullets.IntersectsWith(middleRec) || leftBullets.IntersectsWith(rightRec) || rightBullets.IntersectsWith(leftRec) || rightBullets.IntersectsWith(middleRec) || rightBullets.IntersectsWith(rightRec))
-            //        {
-            //            gameTimer.Stop();
-            //            winnerLabel.Visible = true;
-            //            winnerLabel.Text = "You scored " + player1Points + "points";
-            //            Thread.Sleep(4000);
-            //            Form f = this.FindForm();
-            //            f.Controls.Remove(this);
-            //            // Create an instance of the SecondScreen 
-            //            MainScreen ms = new MainScreen();
-            //            // Add the User Control to the Form
-            //            f.Controls.Add(ms);
-            //        }
-            //    }
-            //}
+            foreach (Bullets x in bulletList)
+            {
+                if (Player1.Collision(x.bulletX, x.bulletY))
+                {
+                    gameTimer.Enabled = false;
+                    winnerLabel.Text = "You scored " + player1Points + " points";
+                    Refresh();
+                    Thread.Sleep(4000);
+                    Form f = this.FindForm();
+                    f.Controls.Remove(this);
+                    // Create an instance of the SecondScreen 
+                    MainScreen ms = new MainScreen();
+                    // Add the User Control to the Form
+                    f.Controls.Add(ms);
+                }
+            }
             #endregion
 
             #region Adding Bullets
             if (bulletCounter == 8)
             {
                 Bullets newBulletLeft = new Bullets(0 - 10, randGen.Next(0, this.Height - 100), "Left");
-                left.Add(newBulletLeft);
+                bulletList.Add(newBulletLeft);
                 Bullets newBulletRight = new Bullets(this.Width, randGen.Next(0, this.Height - 100), "Right");
-                right.Add(newBulletRight);
+                bulletList.Add(newBulletRight);
                 bulletCounter = 0;
             }
             bulletCounter++;
@@ -149,82 +123,42 @@ namespace SpaceRace
             #region Moving Players
             if (wDown == true)
             {
-                player1Y -= player1Speed;
-                leftRec.Y -= player1Speed;
-                middleRec.Y -= player1Speed;
-                rightRec.Y -= player1Speed;
+                Player1.PlayerMoveUpDown(player1Speed, "Up");
             }
-            if (sDown == true && player1Y + shipHeight <= this.Height)
+            if (sDown == true && Player1.Y + shipHeight <= this.Height)
             {
-                player1Y += player1Speed;
-                leftRec.Y += player1Speed;
-                middleRec.Y += player1Speed;
-                rightRec.Y += player1Speed;
+                Player1.PlayerMoveUpDown(player1Speed, "Down");
             }
-            if (aDown == true && player1X >= 0)
+            if (aDown == true && Player1.X >= 0)
             {
-                player1X -= player1Speed;
-                leftRec.X -= player1Speed;
-                middleRec.X -= player1Speed;
-                rightRec.X -= player1Speed;
+                Player1.PlayerMoveLeftRight(player1Speed, "Left");
             }
-            if (dDown == true && player1X + shipWidth <= this.Width)
+            if (dDown == true && Player1.X + shipWidth <= this.Width)
             {
-                player1X += player1Speed;
-                leftRec.X += player1Speed;
-                middleRec.X += player1Speed;
-                rightRec.X += player1Speed;
+                Player1.PlayerMoveLeftRight(player1Speed, "Right");
             }
             #endregion
 
             #region Moving Bullets
-            foreach (Bullets x in left)
+            foreach (Bullets x in bulletList)
             {
-                x.bulletX += 5;
-            }
-            foreach (Bullets x in right)
-            {
-                x.bulletX -= 5;
+                x.BulletsMove();
             }
             #endregion
 
             #region Removing Bullets
-            if (left[0].bulletX >= this.Width)
+            if (bulletList[0].bulletX >= this.Width || bulletList[0].bulletX <= 0)
             {
-                left.RemoveAt(0);
-            }
-            if (right[0].bulletX + bulletWidth <= 0)
-            {
-                right.RemoveAt(0);
+                bulletList.RemoveAt(0);
             }
             #endregion
 
             #region Score
-            if (player1Y + shipHeight <= 0)
+            if (Player1.Y + shipHeight <= 0)
             {
+                Player1.PlayerScore();
                 player1Points++;
                 playerScore.Text = "" + player1Points;
-
-                HighScore hs = new HighScore(player1Points);
-                score.Add(hs);
-
-                player1X = this.Width / 2 - 125;
-                player1Y = this.Height - 50;
-
-                leftRec.X = 295;
-                leftRec.Y = 784;
-                leftRec.Width = 10;
-                leftRec.Height = 24;
-
-                middleRec.X = 302;
-                middleRec.Y = 784;
-                middleRec.Width = 10;
-                middleRec.Height = 43;
-
-                rightRec.X = 310;
-                rightRec.Y = 784;
-                rightRec.Width = 10;
-                rightRec.Height = 24;
             }
             #endregion
 
@@ -232,15 +166,11 @@ namespace SpaceRace
         }
         private void GameScreen1Player_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Bullets b in left)
+            foreach (Bullets b in bulletList)
             {
                 e.Graphics.FillRectangle(whiteBrush, b.bulletX, b.bulletY, b.bulletWidth, b.bulletHeight);
             }
-            foreach (Bullets b in right)
-            {
-                e.Graphics.FillRectangle(whiteBrush, b.bulletX, b.bulletY, b.bulletWidth, b.bulletHeight);
-            }
-            e.Graphics.DrawImage(shipImage, player1X, player1Y, shipWidth, shipHeight);
+            e.Graphics.DrawImage(shipImage, Player1.X, Player1.Y, shipWidth, shipHeight);
         }
     }
 }

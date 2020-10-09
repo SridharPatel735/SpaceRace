@@ -19,8 +19,8 @@ namespace SpaceRace
         {
             X = _playerX;
             Y = _playerY;
-            X = startX;
-            Y = startY;
+            startX = _playerX;
+            startY = _playerY;
         }
 
         public void PlayerScore()
@@ -33,17 +33,11 @@ namespace SpaceRace
             if (_direction == "Up")
             {
                 Y -= player1Speed;
-                leftRec.Y -= player1Speed;
-                middleRec.Y -= player1Speed;
-                rightRec.Y -= player1Speed;
                 return (Y);
             }
             if (_direction == "Down")
             {
                 Y += player1Speed;
-                leftRec.Y += player1Speed;
-                middleRec.Y += player1Speed;
-                rightRec.Y += player1Speed;
                 return (Y);
             }
             return (Y);
@@ -53,17 +47,11 @@ namespace SpaceRace
             if (_direction == "Left")
             {
                 X -= player1Speed;
-                leftRec.X -= player1Speed;
-                middleRec.X -= player1Speed;
-                rightRec.X -= player1Speed;
                 return (X);
             }
             if (_direction == "Right")
             {
                 X += player1Speed;
-                leftRec.X += player1Speed;
-                middleRec.X += player1Speed;
-                rightRec.X += player1Speed;
                 return (X);
             }
             else
@@ -71,33 +59,28 @@ namespace SpaceRace
                 return (X);
             }
         }
-        public void Collision(int bulletX, int bulletY, int width, int height)
+        public Boolean Collision(int bulletX, int bulletY)
         {
             Rectangle Bullets = new Rectangle(bulletX, bulletY, bulletWidth, bulletHeight);
+            Rectangle leftRec = new Rectangle(X, Y + 25, sideRecWidth, sideRecHeight);
+            Rectangle middleRec = new Rectangle(X + sideRecWidth, Y, middleRecWidth, middleRecHeight);
+            Rectangle rightRec = new Rectangle(X + sideRecWidth + middleRecWidth, Y + 25, sideRecWidth, sideRecHeight);
 
             if (Bullets.IntersectsWith(leftRec) || Bullets.IntersectsWith(middleRec) || Bullets.IntersectsWith(rightRec))
             {
-                X = width / 2 - 125;
-                Y = height - 50;
-
-
-                //Rec1.X = Player1.X
-                //Rec1.Y = Player1.Y + 25;
-                //Rec2.X = Player1.X + sideRecWidth;
-                //Rec2.Y = Player1.Y;
-                //Rec3.X = Player1.X + sideRecWidth + middleRecWidth;
-                //Rec3.Y = Player1.Y + 25;
+                X = startX;
+                Y = startY;
+                return true;
             }
-            if (Bullets.IntersectsWith(leftRec) || Bullets.IntersectsWith(middleRec) || Bullets.IntersectsWith(rightRec))
+            else
             {
-                Rectangle leftRec = new Rectangle(X, Y + 25, sideRecWidth, sideRecHeight);
-                Rectangle middleRec = new Rectangle(X + sideRecWidth, Y, middleRecWidth, middleRecHeight);
-                Rectangle rightRec = new Rectangle(X + sideRecWidth + middleRecWidth, Y + 25, sideRecWidth, sideRecHeight);
-
-                X = width / 2 + 100;
-                Y = height - 50;
+                return false;
             }
-            
+        }
+        public void Reset()
+        {
+            X = startX;
+            Y = startY;
         }
     }
 }
