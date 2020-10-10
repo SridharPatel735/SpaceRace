@@ -33,7 +33,6 @@
             this.play2PlayerButton = new System.Windows.Forms.Button();
             this.play1PlayerButton = new System.Windows.Forms.Button();
             this.highScoreButton = new System.Windows.Forms.Button();
-            this.highScoreLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -112,27 +111,13 @@
             this.highScoreButton.TabIndex = 5;
             this.highScoreButton.Text = "HighScore      1 player";
             this.highScoreButton.UseVisualStyleBackColor = false;
-            this.highScoreButton.Click += new System.EventHandler(this.highScoreButton_Click);
             this.highScoreButton.Enter += new System.EventHandler(this.highScoreButton_Enter);
-            // 
-            // highScoreLabel
-            // 
-            this.highScoreLabel.BackColor = System.Drawing.Color.Transparent;
-            this.highScoreLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.highScoreLabel.Font = new System.Drawing.Font("Digital-7 Mono", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.highScoreLabel.ForeColor = System.Drawing.Color.White;
-            this.highScoreLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.highScoreLabel.Location = new System.Drawing.Point(491, 428);
-            this.highScoreLabel.Name = "highScoreLabel";
-            this.highScoreLabel.Size = new System.Drawing.Size(179, 308);
-            this.highScoreLabel.TabIndex = 6;
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.highScoreLabel);
             this.Controls.Add(this.highScoreButton);
             this.Controls.Add(this.play1PlayerButton);
             this.Controls.Add(this.play2PlayerButton);
@@ -151,6 +136,5 @@
         private System.Windows.Forms.Button play2PlayerButton;
         private System.Windows.Forms.Button play1PlayerButton;
         private System.Windows.Forms.Button highScoreButton;
-        private System.Windows.Forms.Label highScoreLabel;
     }
 }

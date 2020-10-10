@@ -197,7 +197,7 @@
             this.intructionLabel.Size = new System.Drawing.Size(729, 111);
             this.intructionLabel.TabIndex = 13;
             this.intructionLabel.Text = "Each Player choose a powerup. Double speed doubles your speed, and reset opponent" +
-    " will let you reset your opponents position twice.";
+    " will let you reset your opponents position.";
             // 
             // outputLabel
             // 

@@ -9,7 +9,7 @@ namespace SpaceRace
 {
     class SpaceShip
     {
-        public Rectangle leftRec, middleRec, rightRec;
+        //Creating Varibles
         int bulletWidth = 10, bulletHeight = 5;
         public int X, Y, startX, startY;
         public Image shipImage = Properties.Resources.Spaceship;
@@ -23,11 +23,13 @@ namespace SpaceRace
             startY = _playerY;
         }
 
+        //Score Method
         public void PlayerScore()
         {
             X = startX;
             Y = startY;
         }
+        //Move method
         public int PlayerMoveUpDown(int player1Speed, string _direction)
         {
             if (_direction == "Up")
@@ -42,6 +44,7 @@ namespace SpaceRace
             }
             return (Y);
         }
+        //Move method
         public int PlayerMoveLeftRight(int player1Speed, string _direction)
         {
             if (_direction == "Left")
@@ -59,6 +62,7 @@ namespace SpaceRace
                 return (X);
             }
         }
+        //Collision method
         public Boolean Collision(int bulletX, int bulletY)
         {
             Rectangle Bullets = new Rectangle(bulletX, bulletY, bulletWidth, bulletHeight);
@@ -68,6 +72,9 @@ namespace SpaceRace
 
             if (Bullets.IntersectsWith(leftRec) || Bullets.IntersectsWith(middleRec) || Bullets.IntersectsWith(rightRec))
             {
+                GameScreen2Player.backgroundPlayer.Stop();
+                GameScreen2Player.collisionPlayer.Play();
+                GameScreen2Player.afterCollision = true;
                 X = startX;
                 Y = startY;
                 return true;
@@ -77,6 +84,7 @@ namespace SpaceRace
                 return false;
             }
         }
+        //Reset method
         public void Reset()
         {
             X = startX;

@@ -8,6 +8,7 @@ namespace SpaceRace
 {
     class Bullets
     {
+        //Creating Varibles
         public int bulletX, bulletY, bulletWidth = 10, bulletHeight = 5, bulletSpeed = 5;
         public string direction;
 
@@ -17,6 +18,7 @@ namespace SpaceRace
             bulletY = _bulletY;
             direction = _direction;
         }
+        //Updating bullet position
         public int BulletsMove()
         {
             if (direction == "Right")

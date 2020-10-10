@@ -13,8 +13,8 @@ namespace SpaceRace
 {
     public partial class MainScreen : UserControl
     {
-        List<HighScore> highScoreList2Player = new List<HighScore>();
-        List<HighScore> highScoreList1Player = new List<HighScore>();
+        //public static List<HighScore> highScoreList2Player = new List<HighScore>();
+        //public static List<HighScore> highScoreList1Player = new List<HighScore>();
         public MainScreen()
         {
             InitializeComponent();
@@ -22,6 +22,7 @@ namespace SpaceRace
 
         private void quitButton_Click(object sender, EventArgs e)
         {
+            //Closing the application
             Application.Exit();
         }
 
@@ -38,6 +39,7 @@ namespace SpaceRace
 
         private void quitButton_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             play2PlayerButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Red;
             play1PlayerButton.BackColor = Color.Black;
@@ -46,6 +48,7 @@ namespace SpaceRace
 
         private void play2PlayerButton_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             play2PlayerButton.BackColor = Color.Lime;
             quitButton.BackColor = Color.Black;
             play1PlayerButton.BackColor = Color.Black;
@@ -54,6 +57,7 @@ namespace SpaceRace
 
         private void play1PlayerButton_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             play1PlayerButton.BackColor = Color.Lime;
             quitButton.BackColor = Color.Black;
             play2PlayerButton.BackColor = Color.Black;
@@ -73,15 +77,11 @@ namespace SpaceRace
 
         private void highScoreButton_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             play1PlayerButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Black;
             play2PlayerButton.BackColor = Color.Black;
             highScoreButton.BackColor = Color.Orange;
-        }
-
-        private void highScoreButton_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

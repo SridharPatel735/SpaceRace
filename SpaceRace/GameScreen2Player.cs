@@ -16,11 +16,14 @@ namespace SpaceRace
 {
     public partial class GameScreen2Player : UserControl
     {
+        //Creating Varibles
         List<Bullets> bulletList = new List<Bullets>();
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush redBrush = new SolidBrush(Color.OrangeRed);
         SpaceShip Player1 = new SpaceShip(533 / 2 - 125, 575 - 50);
         SpaceShip Player2 = new SpaceShip(533 / 2 + 100, 575 - 50);
+        public static SoundPlayer collisionPlayer = new SoundPlayer(Properties.Resources.collisionSound);
+        public static SoundPlayer backgroundPlayer = new SoundPlayer(Properties.Resources.backgroundSound);
         Image shipImage = Properties.Resources.Spaceship;
         int shipWidth = 25, shipHeight = 45;
         int player1Speed, player2Speed;
@@ -30,10 +33,10 @@ namespace SpaceRace
         int winnerHighScore;
         int timerCounter, timerX, timerY;
         int resetPlayer1, resetPlayer2;
-        int bulletCounter;
+        int bulletCounter, soundCounter, afterCollisionCounter;
         Random randGen = new Random();
-
         Boolean reset1, reset2;
+        public static Boolean afterCollision;
         Boolean rightArrowDown, leftArrowDown, upArrowDown, downArrowDown, aDown, wDown, sDown, dDown, nDown, vDown;
 
         public GameScreen2Player()
@@ -41,33 +44,34 @@ namespace SpaceRace
             InitializeComponent();
             SetParameters();
         }
-
+        //Setting Gmae Values
         private void SetParameters()
         {
+            backgroundPlayer.Play();
             winnerLabel.Visible = false;
             switch (SelectionScreen.player1PowerUp)
             {
                 case 1:
+                    reset2 = true;
+                    resetPlayer2 = 8;
                     player1Speed = 4;
-                    reset2 = false;
                     break;
                 case 2:
-                    reset2 = true;
-                    resetPlayer2 = 4;
-                    player1Speed = 2;
+                    player1Speed = 8;
+                    reset2 = false;
                     break;
             }
 
             switch (SelectionScreen.player2PowerUp)
             {
                 case 1:
+                    reset1 = true;
+                    resetPlayer1 = 8;
                     player2Speed = 4;
-                    reset1 = false;
                     break;
                 case 2:
-                    reset1 = true;
-                    resetPlayer1 = 4;
-                    player2Speed = 2;
+                    player2Speed = 8;
+                    reset1 = false;
                     break;
             }
 
@@ -83,7 +87,7 @@ namespace SpaceRace
                 bulletList.Add(newBulletRight);
             }
         }
-
+        //KeyDown Method
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
@@ -126,7 +130,7 @@ namespace SpaceRace
                     break;
             }
         }
-
+        //KeyUp Method
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -163,9 +167,10 @@ namespace SpaceRace
                     break;
             }
         }
-
+        //GameTimer Tick Method
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            //Collision Code
             #region Collisions
             foreach (Bullets x in bulletList)
             {
@@ -173,7 +178,7 @@ namespace SpaceRace
                 Player2.Collision(x.bulletX, x.bulletY);
             }
             #endregion
-
+            //Adding Bullets Code
             #region Adding Bullets
             if (bulletCounter == 8)
             {
@@ -185,20 +190,20 @@ namespace SpaceRace
             }
             bulletCounter++;
             #endregion
-
+            //Powerups Code
             #region PowerUp
-            if (resetPlayer1 >= 0 && vDown == true)
+            if (resetPlayer1 >= 0 && nDown == true)
             {
                 Player1.Reset();
                 resetPlayer1--;
             }
-            if (resetPlayer2 >= 0 && nDown == true)
+            if (resetPlayer2 >= 0 && vDown == true)
             {
                 Player2.Reset();
                 resetPlayer2--;
             }
             #endregion
-
+            //Updating Player position
             #region Moving Players
             if (wDown == true)
             {
@@ -234,14 +239,14 @@ namespace SpaceRace
                 Player1.PlayerMoveLeftRight(player1Speed, "Right");
             }
             #endregion
-
+            //Updating Bullet Position
             #region Moving Bullets
             foreach (Bullets x in bulletList)
             {
                 x.BulletsMove();
             }
             #endregion
-
+            //Updating Timer
             #region Timer Update
             if (timerCounter == 50)
             {
@@ -250,21 +255,21 @@ namespace SpaceRace
             }
             timerCounter++;
             #endregion
-
+            //Game Over Code
             #region Timer Finish
             if (timerY == -5)
             {
                 gameTimer.Stop();
-                if (player1Points >= player2Points)
-                {
-                    winnerHighScore = player1Points;
-                }
-                else
-                {
-                    winnerHighScore = player2Points;
-                }
+                //if (player1Points >= player2Points)
+                //{
+                //    winnerHighScore = player1Points;
+                //}
+                //else
+                //{
+                //    winnerHighScore = player2Points;
+                //}
                 //if (MainScreen.highScoreList2Player.Contains(winnerHighScore))
-                //{}
+                //{ }
                 //else
                 //{
                 //    MainScreen.highScoreList2Player.Add(winnerHighScore);
@@ -296,14 +301,14 @@ namespace SpaceRace
                 f.Controls.Add(ms);
             }
             #endregion
-
+            //Removing Bullets
             #region Removing Bullets
             if (bulletList[0].bulletX >= this.Width || bulletList[0].bulletX <= 0)
             {
                 bulletList.RemoveAt(0);
             }
             #endregion
-
+            //Score Code
             #region Score
             if (Player1.Y + shipHeight <= 0)
             {
@@ -318,10 +323,28 @@ namespace SpaceRace
                 player2Score.Text = "" + player2Points;
             }
             #endregion
-
+            //Background sound
+            #region Background Sound
+            soundCounter++;
+            if (soundCounter >= 382)
+            {
+                backgroundPlayer.Play();
+            }
+            if (afterCollision == true)
+            {
+                afterCollisionCounter++;
+                if (afterCollisionCounter == 50)
+                {
+                    backgroundPlayer.Play();
+                    afterCollisionCounter = 0;
+                    afterCollision = false;
+                }
+            }
+            #endregion
+            //Calling the Paint Method
             Refresh();
         }
-
+        //Painting the whole screen
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.FillRectangle(redBrush, timerX, timerY, 10, this.Height);

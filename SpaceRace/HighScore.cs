@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceRace
 {
-    class HighScore
+    public class HighScore
     {
 
     }

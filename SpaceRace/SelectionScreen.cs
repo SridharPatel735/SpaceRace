@@ -12,6 +12,7 @@ namespace SpaceRace
 {
     public partial class SelectionScreen : UserControl
     {
+        //Creating the Varibles
         public static int player1PowerUp, player2PowerUp;
         public SelectionScreen()
         {
@@ -49,6 +50,7 @@ namespace SpaceRace
 
         private void startButton_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             startButton.BackColor = Color.Lime;
             quitButton.BackColor = Color.Black;
             doubleSpeedPlayer1.BackColor = Color.Black;
@@ -59,6 +61,7 @@ namespace SpaceRace
 
         private void quitButton_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             startButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Red;
             doubleSpeedPlayer1.BackColor = Color.Black;
@@ -69,7 +72,8 @@ namespace SpaceRace
 
         private void doubleSpeedPlayer2_Click(object sender, EventArgs e)
         {
-            player2PowerUp = 1;
+            //Setting the powerup
+            player2PowerUp = 2;
             doubleSpeedPlayer2.Enabled = false;
             doubleSpeedPlayer2.Visible = false;
             resetPlayer1.Enabled = false;
@@ -78,7 +82,8 @@ namespace SpaceRace
 
         private void resetPlayer1_Click(object sender, EventArgs e)
         {
-            player2PowerUp = 2;
+            //Setting the powerup
+            player2PowerUp = 1;
             doubleSpeedPlayer2.Enabled = false;
             doubleSpeedPlayer2.Visible = false;
             resetPlayer1.Enabled = false;
@@ -87,7 +92,8 @@ namespace SpaceRace
 
         private void doubleSpeedPlayer1_Click(object sender, EventArgs e)
         {
-            player1PowerUp = 1;
+            //Setting the powerup
+            player1PowerUp = 2;
             doubleSpeedPlayer1.Enabled = false;
             doubleSpeedPlayer1.Visible = false;
             resetPlayer2.Enabled = false;
@@ -96,6 +102,7 @@ namespace SpaceRace
 
         private void doubleSpeedPlayer2_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             startButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Black;
             doubleSpeedPlayer1.BackColor = Color.Black;
@@ -106,6 +113,7 @@ namespace SpaceRace
 
         private void resetPlayer1_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             startButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Black;
             doubleSpeedPlayer1.BackColor = Color.Black;
@@ -116,6 +124,7 @@ namespace SpaceRace
 
         private void doubleSpeedPlayer1_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             startButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Black;
             doubleSpeedPlayer1.BackColor = Color.Lime;
@@ -126,6 +135,7 @@ namespace SpaceRace
 
         private void resetPlayer2_Enter(object sender, EventArgs e)
         {
+            //Colouring the appropriate button
             startButton.BackColor = Color.Black;
             quitButton.BackColor = Color.Black;
             doubleSpeedPlayer1.BackColor = Color.Black;
@@ -136,7 +146,8 @@ namespace SpaceRace
 
         private void resetPlayer2_Click(object sender, EventArgs e)
         {
-            player1PowerUp = 2;
+            //Setting the powerup
+            player1PowerUp = 1;
             doubleSpeedPlayer1.Enabled = false;
             doubleSpeedPlayer1.Visible = false;
             resetPlayer2.Enabled = false;

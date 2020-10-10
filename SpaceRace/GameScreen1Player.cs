@@ -14,6 +14,7 @@ namespace SpaceRace
 {
     public partial class GameScreen1Player : UserControl
     {
+        //Creating Varibles
         List<Bullets> bulletList = new List<Bullets>();
         SpaceShip Player1 = new SpaceShip(533 / 2 - 125, 575 - 50);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
@@ -33,11 +34,11 @@ namespace SpaceRace
             InitializeComponent();
             SetParameters();
         }
-
+        //Setting Gmae Values
         private void SetParameters()
         {
             winnerLabel.Text = "";
-            player1Speed = 2;
+            player1Speed = 6;
             //add box
             for (int i = 0; i <= 10; i++)
             {
@@ -48,7 +49,7 @@ namespace SpaceRace
             }
             gameTimer.Start();
         }
-
+        //KeyDown Method
         private void GameScreen1Player_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -67,7 +68,7 @@ namespace SpaceRace
                     break;
             }
         }
-
+        //KeyUp Method
         private void GameScreen1Player_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -86,9 +87,10 @@ namespace SpaceRace
                     break;
             }
         }
-
+        //GameTimer Tick Method
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            //Collision Code
             #region Collision
             foreach (Bullets x in bulletList)
             {
@@ -107,7 +109,7 @@ namespace SpaceRace
                 }
             }
             #endregion
-
+            //Adding Bullets Code
             #region Adding Bullets
             if (bulletCounter == 8)
             {
@@ -119,7 +121,7 @@ namespace SpaceRace
             }
             bulletCounter++;
             #endregion
-
+            //Updating Player position
             #region Moving Players
             if (wDown == true)
             {
@@ -138,21 +140,21 @@ namespace SpaceRace
                 Player1.PlayerMoveLeftRight(player1Speed, "Right");
             }
             #endregion
-
+            //Updating Bullet Position
             #region Moving Bullets
             foreach (Bullets x in bulletList)
             {
                 x.BulletsMove();
             }
             #endregion
-
+            //Removing Bullets
             #region Removing Bullets
             if (bulletList[0].bulletX >= this.Width || bulletList[0].bulletX <= 0)
             {
                 bulletList.RemoveAt(0);
             }
             #endregion
-
+            //Score Code
             #region Score
             if (Player1.Y + shipHeight <= 0)
             {
@@ -161,9 +163,10 @@ namespace SpaceRace
                 playerScore.Text = "" + player1Points;
             }
             #endregion
-
+            //Calling the Paint Method
             Refresh();
         }
+        //Painting the whole screen
         private void GameScreen1Player_Paint(object sender, PaintEventArgs e)
         {
             foreach (Bullets b in bulletList)
