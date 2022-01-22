@@ -10,10 +10,10 @@ namespace SpaceRace
     class SpaceShip
     {
         //Creating Varibles
-        int bulletWidth = 10, bulletHeight = 5;
         public int X, Y, startX, startY;
         public Image shipImage = Properties.Resources.Spaceship;
         public int sideRecWidth = 7, middleRecWidth = 11, sideRecHeight = 20, middleRecHeight = 45;
+        public int player1Speed, player2Speed;
 
         public SpaceShip(int _playerX, int _playerY)
         {
@@ -21,6 +21,32 @@ namespace SpaceRace
             Y = _playerY;
             startX = _playerX;
             startY = _playerY;
+
+            switch (SelectionScreen.player1PowerUp)
+            {
+                case 1:
+                    GameScreen2Player.reset2 = true;
+                    GameScreen2Player.resetPlayer2 = 8;
+                    player1Speed = 4;
+                    break;
+                case 2:
+                    player1Speed = 8;
+                    GameScreen2Player.reset2 = false;
+                    break;
+            }
+
+            switch (SelectionScreen.player2PowerUp)
+            {
+                case 1:
+                    GameScreen2Player.reset1 = true;
+                    GameScreen2Player.resetPlayer1 = 8;
+                    player2Speed = 4;
+                    break;
+                case 2:
+                    player2Speed = 8;
+                    GameScreen2Player.reset1 = false;
+                    break;
+            }
         }
 
         //Score Method
@@ -30,7 +56,7 @@ namespace SpaceRace
             Y = startY;
         }
         //Move method
-        public int PlayerMoveUpDown(int player1Speed, string _direction)
+        public int PlayerMoveUpDown(string _direction)
         {
             if (_direction == "Up")
             {
@@ -45,7 +71,7 @@ namespace SpaceRace
             return (Y);
         }
         //Move method
-        public int PlayerMoveLeftRight(int player1Speed, string _direction)
+        public int PlayerMoveLeftRight(string _direction)
         {
             if (_direction == "Left")
             {
@@ -63,9 +89,9 @@ namespace SpaceRace
             }
         }
         //Collision method
-        public Boolean Collision(int bulletX, int bulletY)
+        public Boolean Collision(Bullets bullets)
         {
-            Rectangle Bullets = new Rectangle(bulletX, bulletY, bulletWidth, bulletHeight);
+            Rectangle Bullets = new Rectangle(bullets.bulletX, bullets.bulletY, bullets.bulletWidth, bullets.bulletHeight);
             Rectangle leftRec = new Rectangle(X, Y + 25, sideRecWidth, sideRecHeight);
             Rectangle middleRec = new Rectangle(X + sideRecWidth, Y, middleRecWidth, middleRecHeight);
             Rectangle rightRec = new Rectangle(X + sideRecWidth + middleRecWidth, Y + 25, sideRecWidth, sideRecHeight);

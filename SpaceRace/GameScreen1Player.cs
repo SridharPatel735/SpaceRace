@@ -94,7 +94,8 @@ namespace SpaceRace
             #region Collision
             foreach (Bullets x in bulletList)
             {
-                if (Player1.Collision(x.bulletX, x.bulletY))
+                Bullets tempBullet = new Bullets(x.bulletX, x.bulletY, x.direction);
+                if (Player1.Collision(tempBullet))
                 {
                     gameTimer.Enabled = false;
                     winnerLabel.Text = "You scored " + player1Points + " points";
@@ -125,19 +126,19 @@ namespace SpaceRace
             #region Moving Players
             if (wDown == true)
             {
-                Player1.PlayerMoveUpDown(player1Speed, "Up");
+                Player1.PlayerMoveUpDown("Up");
             }
             if (sDown == true && Player1.Y + shipHeight <= this.Height)
             {
-                Player1.PlayerMoveUpDown(player1Speed, "Down");
+                Player1.PlayerMoveUpDown("Down");
             }
             if (aDown == true && Player1.X >= 0)
             {
-                Player1.PlayerMoveLeftRight(player1Speed, "Left");
+                Player1.PlayerMoveLeftRight("Left");
             }
             if (dDown == true && Player1.X + shipWidth <= this.Width)
             {
-                Player1.PlayerMoveLeftRight(player1Speed, "Right");
+                Player1.PlayerMoveLeftRight("Right");
             }
             #endregion
             //Updating Bullet Position

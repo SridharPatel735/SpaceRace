@@ -26,16 +26,15 @@ namespace SpaceRace
         public static SoundPlayer backgroundPlayer = new SoundPlayer(Properties.Resources.backgroundSound);
         Image shipImage = Properties.Resources.Spaceship;
         int shipWidth = 25, shipHeight = 45;
-        int player1Speed, player2Speed;
         int player1Points = 0;
         int player2Points = 0;
         string winner;
         int winnerHighScore;
         int timerCounter, timerX, timerY;
-        int resetPlayer1, resetPlayer2;
+        public static int resetPlayer1, resetPlayer2;
         int bulletCounter, soundCounter, afterCollisionCounter;
         Random randGen = new Random();
-        Boolean reset1, reset2;
+        public static Boolean reset1, reset2;
         public static Boolean afterCollision;
         Boolean rightArrowDown, leftArrowDown, upArrowDown, downArrowDown, aDown, wDown, sDown, dDown, nDown, vDown;
 
@@ -49,31 +48,6 @@ namespace SpaceRace
         {
             backgroundPlayer.Play();
             winnerLabel.Visible = false;
-            switch (SelectionScreen.player1PowerUp)
-            {
-                case 1:
-                    reset2 = true;
-                    resetPlayer2 = 8;
-                    player1Speed = 4;
-                    break;
-                case 2:
-                    player1Speed = 8;
-                    reset2 = false;
-                    break;
-            }
-
-            switch (SelectionScreen.player2PowerUp)
-            {
-                case 1:
-                    reset1 = true;
-                    resetPlayer1 = 8;
-                    player2Speed = 4;
-                    break;
-                case 2:
-                    player2Speed = 8;
-                    reset1 = false;
-                    break;
-            }
 
             timerX = this.Width / 2 - 5;
             timerY = this.Height;
@@ -174,8 +148,9 @@ namespace SpaceRace
             #region Collisions
             foreach (Bullets x in bulletList)
             {
-                Player1.Collision(x.bulletX, x.bulletY);
-                Player2.Collision(x.bulletX, x.bulletY);
+                Bullets tempBullet = new Bullets(x.bulletX, x.bulletY, x.direction);
+                Player1.Collision(tempBullet);
+                Player2.Collision(tempBullet);
             }
             #endregion
             //Adding Bullets Code
@@ -207,36 +182,36 @@ namespace SpaceRace
             #region Moving Players
             if (wDown == true)
             {
-                Player2.PlayerMoveUpDown(player2Speed, "Up");
+                Player2.PlayerMoveUpDown("Up");
             }
             if (sDown == true && Player2.Y + shipHeight <= this.Height)
             {
-                Player2.PlayerMoveUpDown(player2Speed, "Down");
+                Player2.PlayerMoveUpDown("Down");
             }
             if (aDown == true && Player2.X >= 0)
             {
-                Player2.PlayerMoveLeftRight(player2Speed, "Left");
+                Player2.PlayerMoveLeftRight("Left");
             }
             if (dDown == true && Player2.X + shipWidth <= this.Width)
             {
-                Player2.PlayerMoveLeftRight(player2Speed, "Right");
+                Player2.PlayerMoveLeftRight("Right");
             }
 
             if (upArrowDown == true)
             {
-                Player1.PlayerMoveUpDown(player1Speed, "Up");
+                Player1.PlayerMoveUpDown("Up");
             }
             if (downArrowDown == true && Player1.Y + shipHeight <= this.Height)
             {
-                Player1.PlayerMoveUpDown(player1Speed, "Down");
+                Player1.PlayerMoveUpDown("Down");
             }
             if (leftArrowDown == true && Player1.X >= 0)
             {
-                Player1.PlayerMoveLeftRight(player1Speed, "Left");
+                Player1.PlayerMoveLeftRight("Left");
             }
             if (rightArrowDown == true && Player1.X + shipWidth <= this.Width)
             {
-                Player1.PlayerMoveLeftRight(player1Speed, "Right");
+                Player1.PlayerMoveLeftRight("Right");
             }
             #endregion
             //Updating Bullet Position
