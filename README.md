@@ -1,0 +1,1 @@
+Experience the ultimate arcade thrill with 'Space Race: Galactic Thrills,' a C# and Visual Studio-powered game. Pilot a state-of-the-art spacecraft through breathtaking interstellar courses, dodge obstacles, and compete against other fearless space racers in a high-speed quest for supremacy. Do you have the skills to conquer the cosmos and dominate the leaderboard?
